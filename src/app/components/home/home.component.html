@@ -1,9 +1,15 @@
-<div class="news-list">
-  <div class="news-tile" *ngFor="let item of newsList" (click)="openNews(item.id)">
-    <div class="image-container">
-      <img [src]="item.image" alt="{{item.title}}">
-      <h3 class="image-title">{{item.title}}</h3>
+<div class="page">
+  <h1 class="page-title">Latest News</h1>
+  <app-top-stories [stories]="topStories" [linkPrefix]="'/news'"></app-top-stories>
+  <div class="content-grid">
+    <div class="news-feed">
+      <app-news-card *ngFor="let n of feed" [article]="n" [linkPrefix]="'/news'"></app-news-card>
     </div>
-    <p>{{item.preview}}</p>
+    <aside class="sidebar">
+      <div class="weather-widget">
+        <h3>Weather</h3>
+        <p>20°C &ndash; Clear</p>
+      </div>
+    </aside>
   </div>
 </div>

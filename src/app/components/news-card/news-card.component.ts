@@ -9,10 +9,11 @@ import { LocalNewsArticle } from '../../services/local-news.service';
 })
 export class NewsCardComponent {
   @Input() article!: LocalNewsArticle;
+  @Input() linkPrefix = '/local-news/vienna';
 
   constructor(private router: Router) {}
 
   open() {
-    this.router.navigate(['/local-news/vienna', this.article.id]);
+    this.router.navigate([this.linkPrefix, this.article.id]);
   }
 }
