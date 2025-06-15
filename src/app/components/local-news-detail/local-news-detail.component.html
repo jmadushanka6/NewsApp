@@ -1,0 +1,5 @@
+<div class="local-news-detail" *ngIf="article">
+  <h2>{{article.title}}</h2>
+  <img [src]="article.image_url" alt="{{article.title}}">
+  <p>{{article.content}}</p>
+</div>
