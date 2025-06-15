@@ -49,6 +49,26 @@ nav a:hover {
   padding: 0.5rem;
 }
 
+.news-tile .image-container {
+  position: relative;
+}
+
+.news-tile .image-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  padding: 0.25rem 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  color: var(--color-surface);
+  background-color: rgba(44, 62, 80, 0.7); /* color-primary with transparency */
+}
+
+.news-tile:hover {
+  background-color: var(--color-background);
+}
+
 .news-tile:first-child {
   width: calc(var(--tile-width) * 4);
 }
