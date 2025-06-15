@@ -7,6 +7,10 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { NewsDetailComponent } from './components/news-detail/news-detail.component';
 import { NewsService } from './services/news.service';
+import { NewsCardComponent } from './components/news-card/news-card.component';
+import { TopStoriesComponent } from './components/top-stories/top-stories.component';
+import { ViennaNewsComponent } from './components/vienna-news/vienna-news.component';
+import { LocalNewsDetailComponent } from './components/local-news-detail/local-news-detail.component';
 
 @NgModule({
   declarations: [
@@ -14,13 +18,19 @@ import { NewsService } from './services/news.service';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    NewsDetailComponent
+    NewsDetailComponent,
+    NewsCardComponent,
+    TopStoriesComponent,
+    ViennaNewsComponent,
+    LocalNewsDetailComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
-      { path: 'news/:id', component: NewsDetailComponent }
+      { path: 'news/:id', component: NewsDetailComponent },
+      { path: 'local-news/vienna', component: ViennaNewsComponent },
+      { path: 'local-news/vienna/:id', component: LocalNewsDetailComponent }
     ])
   ],
   providers: [NewsService],

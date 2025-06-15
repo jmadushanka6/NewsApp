@@ -1,0 +1,10 @@
+<div class="news-card" (click)="open()">
+  <div class="image-wrapper">
+    <img [src]="article.image_url" alt="{{article.title}}" />
+  </div>
+  <div class="card-body">
+    <h3 class="title">{{article.title}}</h3>
+    <p class="summary">{{article.summary}}</p>
+    <small class="meta">{{article.category}} | {{article.published_at}}</small>
+  </div>
+</div>
