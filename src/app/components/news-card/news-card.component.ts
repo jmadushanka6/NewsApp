@@ -15,5 +15,6 @@ export class NewsCardComponent {
 
   open() {
     this.router.navigate([this.linkPrefix, this.article.id]);
+    this.router.navigate(['/local-news/vienna', this.article.id]);
   }
 }
