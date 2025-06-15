@@ -8,12 +8,15 @@ import { LocalNewsArticle } from '../../services/local-news.service';
   styleUrls: ['./top-stories.component.scss']
 })
 export class TopStoriesComponent {
-  @Input() stories: LocalNewsArticle[] = [];
+  //@Input() stories: LocalNewsArticle[] = [];
   @Input() linkPrefix = '/local-news/vienna';
+
 
   constructor(private router: Router) {}
 
   open(article: LocalNewsArticle) {
     this.router.navigate([this.linkPrefix, article.id]);
+   // this.router.navigate(['/local-news/vienna', article.id]);
+
   }
 }

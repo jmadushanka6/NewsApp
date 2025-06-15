@@ -8,8 +8,9 @@ import { LocalNewsArticle } from '../../services/local-news.service';
   styleUrls: ['./news-card.component.scss']
 })
 export class NewsCardComponent {
-  @Input() article!: LocalNewsArticle;
+  //@Input() article!: LocalNewsArticle;
   @Input() linkPrefix = '/local-news/vienna';
+
 
   constructor(private router: Router) {}
 
