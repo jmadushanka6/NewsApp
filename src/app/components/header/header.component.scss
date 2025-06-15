@@ -1,5 +1,88 @@
 header {
+  background-color: var(--color-primary);
+  color: var(--color-surface);
+}
+
+.top-bar,
+.bottom-bar {
   display: flex;
   align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+.top-bar {
   justify-content: space-between;
+}
+
+.bottom-bar {
+  justify-content: flex-end;
+}
+
+.branding {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.main-nav {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.main-nav a {
+  position: relative;
+  color: var(--color-surface);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+}
+
+.main-nav a:hover {
+  text-decoration: underline;
+}
+
+/* show separators after first five links */
+.main-nav a:nth-child(-n+5)::after {
+  content: '';
+  position: absolute;
+  right: -0.4rem;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  width: 1px;
+  background-color: var(--color-surface);
+}
+
+.tiktok-btn {
+  margin-left: auto;
+  background: #000;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tiktok-btn svg {
+  display: block;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--color-surface);
+  margin: 0;
+}
+
+.search-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-surface);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+}
+
+.search-btn svg {
+  display: block;
 }
