@@ -14,8 +14,8 @@ export class NewsService {
       title: 'Sunny Weather Expected Tomorrow',
       preview: 'Meteorologists predict sunny skies',
       content: 'Detailed weather forecast goes here...',
-      image: 'assets/weather.jpg',
-      bigImage: 'assets/weather_big.jpg'
+      image: 'assets/sunny.jpg',
+      bigImage: 'assets/sunny.jpg'
     },
     {
       id: 2,

@@ -38,7 +38,7 @@ export class LocalNewsService {
       id: 3,
       title: 'Concert Series Returns to Stephansplatz',
       summary: 'Open-air concerts will resume this summer with local bands.',
-      image_url: 'assets/vienna/concert.jpg',
+      image_url: 'assets/vienna/concert.webp',
       category: 'Entertainment',
       published_at: '2024-05-15',
       read_more_url: '#',
