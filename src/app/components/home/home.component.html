@@ -1,0 +1,7 @@
+<div class="news-list">
+  <div class="news-tile" *ngFor="let item of newsList" (click)="openNews(item.id)">
+    <img [src]="item.image" alt="{{item.title}}">
+    <h3>{{item.title}}</h3>
+    <p>{{item.preview}}</p>
+  </div>
+</div>
