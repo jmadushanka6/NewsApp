@@ -8,7 +8,8 @@ import { WeatherService } from '../../services/weather.service';
 })
 export class WeatherComponent implements OnInit {
   forecast: any[] = [];
-  locationError = false;
+  location = '';
+  hasLocation = true;
 
   constructor(private weatherService: WeatherService) {}
 
@@ -16,20 +17,28 @@ export class WeatherComponent implements OnInit {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         pos => this.loadForecast(pos.coords.latitude, pos.coords.longitude),
-        () => (this.locationError = true)
+        () => (this.hasLocation = false)
       );
     } else {
-      this.locationError = true;
+      this.hasLocation = false;
     }
   }
 
   private loadForecast(lat: number, lon: number): void {
     this.weatherService.getForecast(lat, lon).subscribe(data => {
-      this.forecast = (data.forecast && data.forecast.forecastday) || [];
+      if (data.location) {
+        const loc = data.location;
+        this.location = [loc.name, loc.state || loc.country]
+          .filter(Boolean)
+          .join(', ');
+      }
+      if (data.forecast && data.forecast.daily) {
+        this.forecast = data.forecast.daily.slice(0, 6);
+      }
     });
   }
 
-  iconUrl(path: string): string {
-    return path.startsWith('http') ? path : 'https:' + path;
+  iconUrl(icon: string): string {
+    return `https://openweathermap.org/img/wn/${icon}@2x.png`;
   }
 }
