@@ -20,6 +20,12 @@ header {
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  .site-title {
+    color: var(--color-surface);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.25rem;
+  }
 }
 
 .main-nav {
