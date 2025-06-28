@@ -28,17 +28,17 @@ export class WeatherComponent implements OnInit {
     this.weatherService.getForecast(lat, lon).subscribe(data => {
       if (data.location) {
         const loc = data.location;
-        this.location = [loc.name, loc.state || loc.country]
+        this.location = [loc.name, loc.region || loc.country]
           .filter(Boolean)
           .join(', ');
       }
-      if (data.forecast && data.forecast.daily) {
-        this.forecast = data.forecast.daily.slice(0, 6);
+      if (data.forecast && data.forecast.forecastday) {
+        this.forecast = data.forecast.forecastday;
       }
     });
   }
 
   iconUrl(icon: string): string {
-    return `https://openweathermap.org/img/wn/${icon}@2x.png`;
+    return icon.startsWith('//') ? `https:${icon}` : icon;
   }
 }
