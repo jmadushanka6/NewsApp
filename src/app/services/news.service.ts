@@ -14,24 +14,24 @@ export class NewsService {
       title: 'Sunny Weather Expected Tomorrow',
       preview: 'Meteorologists predict sunny skies',
       content: 'Detailed weather forecast goes here...',
-      image: 'https://source.unsplash.com/random/400x300?sig=1',
-      bigImage: 'https://source.unsplash.com/random/800x600?sig=1'
+      image: 'https://picsum.photos/400/300?random=1',
+      bigImage: 'https://picsum.photos/800/600?random=1'
     },
     {
       id: 2,
       title: 'New Electric Car Model Released',
       preview: 'Automaker unveils latest EV',
       content: 'Full article about the new electric car...',
-      image: 'https://source.unsplash.com/random/400x300?sig=2',
-      bigImage: 'https://source.unsplash.com/random/800x600?sig=2'
+      image: 'https://picsum.photos/400/300?random=2',
+      bigImage: 'https://picsum.photos/800/600?random=2'
     },
     {
       id: 3,
       title: 'City Council Approves Park Renovation',
       preview: 'Local park to get major facelift',
       content: 'Details about the renovation project...',
-      image: 'https://source.unsplash.com/random/400x300?sig=3',
-      bigImage: 'https://source.unsplash.com/random/800x600?sig=3'
+      image: 'https://picsum.photos/400/300?random=3',
+      bigImage: 'https://picsum.photos/800/600?random=3'
     }
   ];
 
