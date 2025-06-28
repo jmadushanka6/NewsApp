@@ -1,0 +1,21 @@
+.weather {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.day {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.date {
+  width: 6rem;
+}
+.temp {
+  font-weight: bold;
+}
+
+.location {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
