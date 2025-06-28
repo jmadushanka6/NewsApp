@@ -5,7 +5,8 @@
   "scripts": {
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "npm run build && npx firebase deploy"
   },
   "dependencies": {
     "@angular/animations": "~17.0.0",
@@ -24,6 +25,7 @@
     "@angular-devkit/build-angular": "~17.0.0",
     "@angular/cli": "~17.0.0",
     "@angular/compiler-cli": "~17.0.0",
-    "typescript": "~5.2.0"
+    "typescript": "~5.2.0",
+    "firebase-tools": "^12.4.0"
   }
 }
