@@ -8,11 +8,12 @@ import { LocalNewsArticle } from '../../services/local-news.service';
   styleUrls: ['./news-card.component.scss']
 })
 export class NewsCardComponent {
-  @Input() article!: LocalNewsArticle;
+  @Input() article: any;
+  @Input() baseRoute = '/local-news/vienna';
 
   constructor(private router: Router) {}
 
   open() {
-    this.router.navigate(['/local-news/vienna', this.article.id]);
+    this.router.navigate([this.baseRoute, this.article.id]);
   }
 }

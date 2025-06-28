@@ -14,24 +14,24 @@ export class NewsService {
       title: 'Sunny Weather Expected Tomorrow',
       preview: 'Meteorologists predict sunny skies',
       content: 'Detailed weather forecast goes here...',
-      image: 'assets/sunny.jpg',
-      bigImage: 'assets/sunny.jpg'
+      image: 'https://ichef.bbci.co.uk/images/ic/1024xn/p0l99668.jpg.webp',
+      bigImage: 'https://ichef.bbci.co.uk/images/ic/1024xn/p0l99668.jpg.webp'
     },
     {
       id: 2,
       title: 'New Electric Car Model Released',
       preview: 'Automaker unveils latest EV',
       content: 'Full article about the new electric car...',
-      image: 'assets/car.jpg',
-      bigImage: 'assets/car_big.jpg'
+      image: 'https://ichef.bbci.co.uk/images/ic/1024xn/p0l99668.jpg.webp',
+      bigImage: 'https://ichef.bbci.co.uk/images/ic/1024xn/p0l99668.jpg.webp'
     },
     {
       id: 3,
       title: 'City Council Approves Park Renovation',
       preview: 'Local park to get major facelift',
       content: 'Details about the renovation project...',
-      image: 'assets/park.jpg',
-      bigImage: 'assets/park_big.jpg'
+      image: 'https://ichef.bbci.co.uk/images/ic/1024xn/p0l99668.jpg.webp',
+      bigImage: 'https://ichef.bbci.co.uk/images/ic/1024xn/p0l99668.jpg.webp'
     }
   ];
 

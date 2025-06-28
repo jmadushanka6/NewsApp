@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsService, News } from '../../services/news.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,15 +7,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  newsList: News[] = [];
+  topStories: News[] = [];
+  feed: News[] = [];
 
-  constructor(private newsService: NewsService, private router: Router) {}
+  constructor(private newsService: NewsService) {}
 
   ngOnInit(): void {
-    this.newsList = this.newsService.getNews();
+    const all = this.newsService.getNews();
+    this.topStories = all.slice(0, 3);
+    this.feed = all.slice(3);
   }
 
-  openNews(id: number) {
-    this.router.navigate(['/news', id]);
-  }
 }
