@@ -1,4 +1,4 @@
-<header>
+<header [class.hidden]="isHidden">
   <div class="top-bar">
     <div class="branding">
       <span class="logo" aria-hidden="true">
@@ -10,7 +10,12 @@
       <span class="site-title">News App</span>
     </div>
 
-    <nav class="main-nav">
+    <button class="menu-toggle" aria-label="Toggle navigation" (click)="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="main-nav" [class.open]="isMenuOpen" (click)="closeMenu()">
       <a href="#">Home</a>
       <a href="#">Region</a>
       <a href="#">Sports</a>
