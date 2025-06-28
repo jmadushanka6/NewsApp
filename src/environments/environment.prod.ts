@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
   weatherApi: {
-    apiKey: 'REPLACE_WITH_API_KEY'
+    apiKey: "f49da499dde04a5fa9820136251506"
   }
 };
