@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { HomeComponent } from './components/home/home.component';
 import { NewsDetailComponent } from './components/news-detail/news-detail.component';
 import { NewsService } from './services/news.service';
 import { NewsCardComponent } from './components/news-card/news-card.component';
@@ -17,7 +16,6 @@ import { LocalNewsDetailComponent } from './components/local-news-detail/local-n
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent,
     NewsDetailComponent,
     NewsCardComponent,
     TopStoriesComponent,
@@ -27,7 +25,7 @@ import { LocalNewsDetailComponent } from './components/local-news-detail/local-n
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
+      { path: '', redirectTo: 'local-news/vienna', pathMatch: 'full' },
       { path: 'news/:id', component: NewsDetailComponent },
       { path: 'local-news/vienna', component: ViennaNewsComponent },
       { path: 'local-news/vienna/:id', component: LocalNewsDetailComponent }
