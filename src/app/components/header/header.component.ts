@@ -53,7 +53,12 @@ export class HeaderComponent {
       document.querySelectorAll('h1, h2, h3.title')
     ).find(e => e.textContent?.trim() === title) as HTMLElement | undefined;
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const clickable = el.closest('.news-card, .story') as HTMLElement | null;
+      if (clickable) {
+        clickable.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      } else {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
     this.toggleSearch();
   }
