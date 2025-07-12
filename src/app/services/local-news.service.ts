@@ -133,4 +133,11 @@ export class LocalNewsService {
   getViennaNewsById(id: number): LocalNewsArticle | undefined {
     return this.viennaNews.find(n => n.id === id);
   }
+
+  incrementViews(id: number): void {
+    const article = this.getViennaNewsById(id);
+    if (article) {
+      article.views += 1;
+    }
+  }
 }
