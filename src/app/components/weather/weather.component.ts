@@ -11,6 +11,8 @@ export class WeatherComponent implements OnInit {
   location = '';
   hasLocation = true;
 
+  private readonly cacheKey = 'weatherCache';
+
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit(): void {
@@ -25,6 +27,26 @@ export class WeatherComponent implements OnInit {
   }
 
   private loadForecast(lat: number, lon: number): void {
+    const today = new Date().toISOString().split('T')[0];
+    const cachedRaw = localStorage.getItem(this.cacheKey);
+    if (cachedRaw) {
+      try {
+        const cached = JSON.parse(cachedRaw);
+        if (
+          cached.date === today &&
+          cached.lat === lat &&
+          cached.lon === lon &&
+          Array.isArray(cached.forecast)
+        ) {
+          this.location = cached.location || '';
+          this.forecast = cached.forecast;
+          return;
+        }
+      } catch {
+        // ignore corrupted cache
+      }
+    }
+
     this.weatherService.getForecast(lat, lon).subscribe(data => {
       if (data.location) {
         const loc = data.location;
@@ -34,6 +56,16 @@ export class WeatherComponent implements OnInit {
       }
       if (data.forecast && data.forecast.forecastday) {
         this.forecast = data.forecast.forecastday;
+        localStorage.setItem(
+          this.cacheKey,
+          JSON.stringify({
+            date: today,
+            lat,
+            lon,
+            location: this.location,
+            forecast: this.forecast,
+          })
+        );
       }
     });
   }
