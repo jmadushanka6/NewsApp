@@ -51,6 +51,14 @@ header {
   background-color: var(--color-surface);
 }
 
+
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.social-icon,
 .tiktok-btn {
   margin-left: 0;
   background: #000;
@@ -60,8 +68,10 @@ header {
   display: flex;
   align-items: center;
   cursor: pointer;
+  text-decoration: none;
 }
 
+.social-icon svg,
 .tiktok-btn svg {
   display: block;
 }
@@ -161,6 +171,7 @@ header {
     margin-left: auto;
   }
 
+  .social-icon,
   .tiktok-btn {
     margin-left: 0;
   }
