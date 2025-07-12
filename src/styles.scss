@@ -83,10 +83,18 @@ nav a:hover {
   height: calc(var(--tile-image-height) * 4);
 }
 
+.news-tile:first-child {
+  width: calc(var(--tile-width) * 4);
+}
+
 .news-tile img {
   width: 100%;
   height: var(--tile-image-height);
   object-fit: cover;
+}
+
+.news-tile:first-child img {
+  height: calc(var(--tile-image-height) * 4);
 }
 
 .news-tile p {
