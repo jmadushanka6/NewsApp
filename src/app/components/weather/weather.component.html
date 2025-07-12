@@ -4,7 +4,9 @@
     <div class="day" *ngFor="let d of forecast">
       <div class="date">{{ d.date | date:'EEE, MMM d' }}</div>
       <img [src]="iconUrl(d.day.condition.icon)" alt="" />
-      <div class="temp">{{ d.day.avgtemp_c | number:'1.0-0' }}°C</div>
+      <div class="temp">
+        {{ d.day?.avgtemp_c !== undefined ? (d.day.avgtemp_c | number:'1.0-0') : '?' }}°C
+      </div>
       <div class="desc">{{ d.day.condition.text }}</div>
     </div>
   </div>
