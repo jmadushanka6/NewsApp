@@ -8,5 +8,8 @@
     <small class="meta" *ngIf="article.category">
       {{article.category}} | {{article.published_at}}
     </small>
+    <small class="meta" *ngIf="article.created_at || article.views !== undefined">
+      Added: {{article.created_at}} | Views: {{article.views}}
+    </small>
   </div>
 </div>

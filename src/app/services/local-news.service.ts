@@ -7,6 +7,8 @@ export interface LocalNewsArticle {
   image_url: string;
   category: string;
   published_at: string;
+  created_at: string;
+  views: number;
   read_more_url: string;
   content: string;
 }
@@ -21,6 +23,8 @@ export class LocalNewsService {
       image_url: 'https://picsum.photos/400/300?random=11',
       category: 'Culture',
       published_at: '2024-05-10',
+      created_at: '2024-05-10',
+      views: 34,
       read_more_url: '#',
       content: 'Full article about the vibrant street festival taking place in Vienna...'
     },
@@ -31,6 +35,8 @@ export class LocalNewsService {
       image_url: 'https://picsum.photos/400/300?random=12',
       category: 'Local',
       published_at: '2024-05-12',
+      created_at: '2024-05-12',
+      views: 28,
       read_more_url: '#',
       content: 'Article covering the inauguration of the new tram line...'
     },
@@ -41,6 +47,8 @@ export class LocalNewsService {
       image_url: 'https://picsum.photos/400/300?random=13',
       category: 'Entertainment',
       published_at: '2024-05-15',
+      created_at: '2024-05-15',
+      views: 19,
       read_more_url: '#',
       content: 'Details on the upcoming concert series in Stephansplatz...'
     },
@@ -51,6 +59,8 @@ export class LocalNewsService {
       image_url: 'https://picsum.photos/400/300?random=14',
       category: 'Animals',
       published_at: '2024-05-17',
+      created_at: '2024-05-17',
+      views: 52,
       read_more_url: '#',
       content: 'More information about the new addition to the Vienna Zoo...'
     },
@@ -61,6 +71,8 @@ export class LocalNewsService {
       image_url: 'https://picsum.photos/400/300?random=15',
       category: 'Infrastructure',
       published_at: '2024-05-20',
+      created_at: '2024-05-20',
+      views: 15,
       read_more_url: '#',
       content: 'Everything about the expansion of cycling infrastructure...'
     },
@@ -71,6 +83,8 @@ export class LocalNewsService {
       image_url: 'https://picsum.photos/400/300?random=16',
       category: 'Lifestyle',
       published_at: '2024-05-22',
+      created_at: '2024-05-22',
+      views: 23,
       read_more_url: '#',
       content: 'Article on the growing trend of organic produce in Vienna...'
     },
@@ -81,6 +95,8 @@ export class LocalNewsService {
       image_url: 'https://picsum.photos/400/300?random=17',
       category: 'Business',
       published_at: '2024-05-25',
+      created_at: '2024-05-25',
+      views: 41,
       read_more_url: '#',
       content: 'Coverage of the opening ceremony of the tech hub...'
     },
@@ -91,6 +107,8 @@ export class LocalNewsService {
       image_url: 'https://picsum.photos/400/300?random=18',
       category: 'Culture',
       published_at: '2024-05-27',
+      created_at: '2024-05-27',
+      views: 17,
       read_more_url: '#',
       content: 'Insights into the renovation and history of the coffee house...'
     },
@@ -101,6 +119,8 @@ export class LocalNewsService {
       image_url: 'https://picsum.photos/400/300?random=19',
       category: 'Weather',
       published_at: '2024-05-30',
+      created_at: '2024-05-30',
+      views: 62,
       read_more_url: '#',
       content: 'Full forecast details and tips for staying dry...'
     }
