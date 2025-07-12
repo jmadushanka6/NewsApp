@@ -5,6 +5,8 @@ export interface News {
   content: string;
   image: string;
   bigImage?: string;
+  created_at: string;
+  views: number;
 }
 
 export class NewsService {
@@ -15,7 +17,9 @@ export class NewsService {
       preview: 'Meteorologists predict sunny skies',
       content: 'Detailed weather forecast goes here...',
       image: 'https://picsum.photos/400/300?random=1',
-      bigImage: 'https://picsum.photos/800/600?random=1'
+      bigImage: 'https://picsum.photos/800/600?random=1',
+      created_at: '2024-05-01',
+      views: 120
     },
     {
       id: 2,
@@ -23,7 +27,9 @@ export class NewsService {
       preview: 'Automaker unveils latest EV',
       content: 'Full article about the new electric car...',
       image: 'https://picsum.photos/400/300?random=2',
-      bigImage: 'https://picsum.photos/800/600?random=2'
+      bigImage: 'https://picsum.photos/800/600?random=2',
+      created_at: '2024-05-02',
+      views: 95
     },
     {
       id: 3,
@@ -31,7 +37,9 @@ export class NewsService {
       preview: 'Local park to get major facelift',
       content: 'Details about the renovation project...',
       image: 'https://picsum.photos/400/300?random=3',
-      bigImage: 'https://picsum.photos/800/600?random=3'
+      bigImage: 'https://picsum.photos/800/600?random=3',
+      created_at: '2024-05-03',
+      views: 76
     }
   ];
 
