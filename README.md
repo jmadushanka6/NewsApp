@@ -1,6 +1,6 @@
 # NewsApp
 
-This is a simple Angular application that displays news articles from a dummy service.
+This is a simple Angular application that displays news articles fetched from a Firebase Firestore collection.
 
 ## Development
 
@@ -17,4 +17,4 @@ This is a simple Angular application that displays news articles from a dummy se
    npm test
    ```
 
-The application is structured with reusable components and a `NewsService` that returns mock data. It is ready for future extension to load data from an external API.
+The application is structured with reusable components. Both the `NewsService` and `LocalNewsService` load articles from the same `news` collection in Firestore. A demo Firebase configuration is already provided in the environment files, but you can replace it with your own project settings if desired.
