@@ -4,12 +4,9 @@ import firebase from 'firebase/compat/app';
 import { Observable } from 'rxjs';
 import { News } from './news.service';
 
-export interface LocalNewsArticle extends News {
-  image_url?: string;
-  category?: string;
-  published_at?: string;
-  read_more_url?: string;
-}
+// Local news articles follow the same structure as regular news
+// defined in the `News` interface. No additional fields are required.
+export type LocalNewsArticle = News;
 
 @Injectable({ providedIn: 'root' })
 export class LocalNewsService {
