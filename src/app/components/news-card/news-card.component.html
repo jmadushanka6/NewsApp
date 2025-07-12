@@ -1,10 +1,10 @@
 <div class="news-card" (click)="open()">
   <div class="image-wrapper">
-    <img [src]="article.image_url || article.image" alt="{{article.title}}" />
+    <img [src]="article.image_url || article.image" alt="{{article.title_short}}" />
   </div>
   <div class="card-body">
-    <h3 class="title">{{article.title}}</h3>
-    <p class="summary">{{article.summary || article.preview}}</p>
+    <h3 class="title">{{article.title_short}}</h3>
+    <p class="summary">{{article.desc_short}}</p>
     <small class="meta" *ngIf="article.category">
       {{article.category}} | {{article.published_at}}
     </small>

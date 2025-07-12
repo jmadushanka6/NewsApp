@@ -1,6 +1,6 @@
 <div class="news-detail" *ngIf="news">
-  <h2>{{news.title}}</h2>
-  <img [src]="news.bigImage || news.image" alt="{{news.title}}">
+  <h2>{{news.title_long}}</h2>
+  <img [src]="news.bigImage || news.image" alt="{{news.title_long}}">
+  <p class="summary">{{news.desc_long}}</p>
   <p class="meta">Added: {{news.created_at}} | Views: {{news.views}}</p>
-  <p>{{news.content}}</p>
 </div>
