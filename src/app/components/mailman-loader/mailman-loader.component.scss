@@ -1,21 +1,40 @@
+
 .mailman-wrapper {
   position: relative;
   width: 30vmin;
   height: 30vmin;
-  margin: 2vmin auto;
+  margin: 4vmin auto;
 }
 
 .mailman {
   width: 100%;
   height: 100%;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='16' cy='12' r='8' fill='%23555'/><rect x='12' y='20' width='8' height='20' fill='%23555'/><rect x='20' y='26' width='20' height='12' rx='2' ry='2' fill='%23999'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path d='M28 50h-4v-14h4zM40 50h-4V36h4z' fill='%23447ab4'/><rect x='26' y='22' width='12' height='16' rx='2' fill='%235975a1'/><path d='M24 28h-6v8h6z' fill='%238d6e63'/><circle cx='32' cy='14' r='6' fill='%23a67c52'/><rect x='28' y='8' width='8' height='3' fill='%23447ab4'/></svg>");
   background-size: contain;
   background-repeat: no-repeat;
-  animation: walk 8s linear infinite;
+  position: absolute;
+  bottom: 0;
+  animation: walk 6s linear infinite;
+}
+
+.letter {
+  position: absolute;
+  bottom: 40%;
+  left: 50%;
+  width: 6vmin;
+  height: 4vmin;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 16'><rect width='24' height='16' rx='2' fill='%23fff' stroke='%23999'/><path d='M0 0l12 8L24 0' fill='none' stroke='%23999'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: drop 2s ease-in-out infinite;
 }
 
 .error .mailman {
   animation: none;
+}
+
+.error .letter {
+  animation: drop 2s ease-in-out infinite;
 }
 
 .error-message {
@@ -25,6 +44,11 @@
 }
 
 @keyframes walk {
-  0% { transform: translateX(-30vmin); }
-  100% { transform: translateX(calc(100vw + 30vmin)); }
+  0% { transform: translateX(-40vmin); }
+  100% { transform: translateX(calc(100vw + 40vmin)); }
+}
+
+@keyframes drop {
+  0% { transform: translate(0, 0); opacity: 1; }
+  100% { transform: translate(-10vmin, 10vmin); opacity: 0; }
 }
