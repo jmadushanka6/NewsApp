@@ -14,6 +14,8 @@ export class NewsCardComponent {
   constructor(private router: Router) {}
 
   open() {
-    this.router.navigate([this.baseRoute, this.article.id]);
+    this.router.navigate([this.baseRoute, this.article.id], {
+      state: { article: this.article }
+    });
   }
 }

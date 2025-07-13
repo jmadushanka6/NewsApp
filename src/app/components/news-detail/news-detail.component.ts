@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NewsService, News } from '../../services/news.service';
-import { Observable } from 'rxjs';
+import { Observable, of, first } from 'rxjs';
 
 @Component({
   selector: 'app-news-detail',
@@ -10,6 +10,8 @@ import { Observable } from 'rxjs';
 })
 export class NewsDetailComponent implements OnInit {
   news$?: Observable<News>;
+  loading = false;
+  error = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -18,9 +20,21 @@ export class NewsDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const stateNews = this.router.getCurrentNavigation()?.extras.state?.['article'] as News | undefined;
     const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
+
+    if (stateNews) {
+      this.news$ = of(stateNews);
+    } else if (id) {
+      this.loading = true;
       this.news$ = this.newsService.getNewsById(id);
+      this.news$.pipe(first()).subscribe({
+        next: () => (this.loading = false),
+        error: () => {
+          this.loading = false;
+          this.error = true;
+        }
+      });
     } else {
       this.router.navigate(['/']);
     }
