@@ -16,7 +16,8 @@ export class LocalNewsDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private service: LocalNewsService) {}
 
   ngOnInit(): void {
-    const stateArticle = this.router.getCurrentNavigation()?.extras.state?.['article'] as LocalNewsArticle | undefined;
+    const navigationState = this.router.getCurrentNavigation()?.extras.state as { article?: LocalNewsArticle } | undefined;
+    const stateArticle = navigationState?.article || (history.state && history.state['article']) as LocalNewsArticle | undefined;
     const id = this.route.snapshot.paramMap.get('id');
 
     if (stateArticle) {

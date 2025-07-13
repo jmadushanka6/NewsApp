@@ -20,7 +20,8 @@ export class NewsDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const stateNews = this.router.getCurrentNavigation()?.extras.state?.['article'] as News | undefined;
+    const navigationState = this.router.getCurrentNavigation()?.extras.state as { article?: News } | undefined;
+    const stateNews = navigationState?.article || (history.state && history.state['article']) as News | undefined;
     const id = this.route.snapshot.paramMap.get('id');
 
     if (stateNews) {
