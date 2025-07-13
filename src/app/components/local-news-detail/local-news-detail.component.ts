@@ -16,7 +16,7 @@ export class LocalNewsDetailComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.service.incrementViews(id);
+      //this.service.incrementViews(id);
       this.article$ = this.service.getViennaNewsById(id);
     } else {
       this.router.navigate(['/local-news/vienna']);
