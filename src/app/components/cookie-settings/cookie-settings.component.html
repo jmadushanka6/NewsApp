@@ -2,17 +2,20 @@
   <h2>Manage Cookie Preferences</h2>
   <p>Update how we use cookies on this site.</p>
   <form (ngSubmit)="save()">
-    <label>
+    <label class="toggle">
       <input type="checkbox" disabled checked />
-      <span>Essential cookies (always enabled)</span>
+      <span class="slider"></span>
+      <span class="label-text">Essential cookies (always enabled)</span>
     </label>
-    <label>
+    <label class="toggle">
       <input type="checkbox" [(ngModel)]="prefs.analytics" name="analytics" />
-      <span>Analytics cookies</span>
+      <span class="slider"></span>
+      <span class="label-text">Analytics cookies</span>
     </label>
-    <label>
+    <label class="toggle">
       <input type="checkbox" [(ngModel)]="prefs.marketing" name="marketing" />
-      <span>Marketing cookies</span>
+      <span class="slider"></span>
+      <span class="label-text">Marketing cookies</span>
     </label>
     <button type="submit">Save preferences</button>
   </form>
