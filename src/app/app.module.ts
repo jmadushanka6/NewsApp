@@ -14,7 +14,6 @@ import { NewsService } from './services/news.service';
 import { NewsCardComponent } from './components/news-card/news-card.component';
 import { TopStoriesComponent } from './components/top-stories/top-stories.component';
 import { ViennaNewsComponent } from './components/vienna-news/vienna-news.component';
-import { LocalNewsDetailComponent } from './components/local-news-detail/local-news-detail.component';
 import { WeatherComponent } from './components/weather/weather.component';
 import { MailmanLoaderComponent } from './components/mailman-loader/mailman-loader.component';
 import { CookieBannerComponent } from './components/cookie-banner/cookie-banner.component';
@@ -30,7 +29,6 @@ import { CookiePolicyComponent } from './components/cookie-policy/cookie-policy.
     NewsCardComponent,
     TopStoriesComponent,
     ViennaNewsComponent,
-    LocalNewsDetailComponent,
     WeatherComponent,
     MailmanLoaderComponent,
     CookieBannerComponent,
@@ -44,10 +42,8 @@ import { CookiePolicyComponent } from './components/cookie-policy/cookie-policy.
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: 'local-news/vienna', pathMatch: 'full' },
-      { path: 'news/:id', component: NewsDetailComponent },
-      { path: 'local-news/vienna', component: ViennaNewsComponent },
-      { path: 'local-news/vienna/:id', component: LocalNewsDetailComponent },
+      { path: '',component: ViennaNewsComponent, pathMatch: 'full' },
+      { path: ':id', component: NewsDetailComponent },
       { path: 'cookie-settings', component: CookieSettingsComponent },
       { path: 'cookie-policy', component: CookiePolicyComponent }
     ])

@@ -1,14 +1,16 @@
 <div class="page">
-  <app-mailman-loader *ngIf="loading || error" [error]="error"></app-mailman-loader>
-  <h1 class="page-title">Vienna Local News</h1>
+  <h1 class="page-title">Top News</h1>
+    <app-mailman-loader *ngIf="loading || error" [error]="error"></app-mailman-loader>
   <app-top-stories [stories]="topStories"></app-top-stories>
+    <h1 class="page-title">Daily News</h1>
   <div class="content-grid">
+      <app-mailman-loader *ngIf="loading || error" [error]="error"></app-mailman-loader>
     <div class="news-feed">
       <app-news-card *ngFor="let n of feed" [article]="n"></app-news-card>
     </div>
     <aside class="sidebar">
       <div class="weather-widget">
-        <app-weather></app-weather>
+          <app-weather></app-weather>
       </div>
     </aside>
   </div>

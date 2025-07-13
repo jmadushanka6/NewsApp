@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalNewsArticle, LocalNewsService } from '../../services/local-news.service';
+import { News, NewsService } from '../../services/news.service';
 import { first } from 'rxjs';
 
 @Component({
@@ -8,16 +8,16 @@ import { first } from 'rxjs';
   styleUrls: ['./vienna-news.component.scss']
 })
 export class ViennaNewsComponent implements OnInit {
-  topStories: LocalNewsArticle[] = [];
-  feed: LocalNewsArticle[] = [];
+  topStories: News[] = [];
+  feed: News[] = [];
   loading = true;
   error = false;
 
-  constructor(private localNews: LocalNewsService) {}
+  constructor(private news: NewsService) {}
 
   ngOnInit(): void {
-    this.localNews
-      .getViennaNews()
+    this.news
+      .getNews()
       .pipe(first())
       .subscribe({
         next: all => {

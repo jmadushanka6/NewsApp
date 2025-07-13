@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocalNewsArticle } from '../../services/local-news.service';
+import { News } from '../../services/news.service';
 
 @Component({
   selector: 'app-top-stories',
@@ -8,12 +8,12 @@ import { LocalNewsArticle } from '../../services/local-news.service';
   styleUrls: ['./top-stories.component.scss']
 })
 export class TopStoriesComponent {
-  @Input() stories: LocalNewsArticle[] = [];
-  @Input() baseRoute = '/local-news/vienna';
+  @Input() stories: News[] = [];
+  @Input() baseRoute = '';
 
   constructor(private router: Router) {}
 
-  open(article: LocalNewsArticle) {
+  open(article: News) {
     this.router.navigate([this.baseRoute, article.id], {
       state: { article }
     });
