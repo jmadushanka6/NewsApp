@@ -6,7 +6,7 @@
     <h3 class="title">{{article.title_short}}</h3>
     <p class="summary">{{article.desc_short}}</p>
     <small class="meta" *ngIf="article.created_at || article.views !== undefined">
-      Added: {{article.created_at}} | Views: {{article.views}}
+      Added: {{article.created_at | date:'yyyy-MM-dd hh:mm a'}} | Views: {{article.views}}
     </small>
   </div>
 </div>

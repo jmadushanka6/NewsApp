@@ -14,6 +14,8 @@ export class TopStoriesComponent {
   constructor(private router: Router) {}
 
   open(article: LocalNewsArticle) {
-    this.router.navigate([this.baseRoute, article.id]);
+    this.router.navigate([this.baseRoute, article.id], {
+      state: { article }
+    });
   }
 }

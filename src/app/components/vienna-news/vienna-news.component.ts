@@ -10,6 +10,8 @@ import { first } from 'rxjs';
 export class ViennaNewsComponent implements OnInit {
   topStories: LocalNewsArticle[] = [];
   feed: LocalNewsArticle[] = [];
+  loading = true;
+  error = false;
 
   constructor(private localNews: LocalNewsService) {}
 
@@ -17,9 +19,16 @@ export class ViennaNewsComponent implements OnInit {
     this.localNews
       .getViennaNews()
       .pipe(first())
-      .subscribe(all => {
-        this.topStories = all.slice(0, 3);
-        this.feed = all.slice(3);
+      .subscribe({
+        next: all => {
+          this.topStories = all.slice(0, 3);
+          this.feed = all.slice(3);
+          this.loading = false;
+        },
+        error: () => {
+          this.loading = false;
+          this.error = true;
+        }
       });
   }
 }

@@ -15,6 +15,7 @@ import { TopStoriesComponent } from './components/top-stories/top-stories.compon
 import { ViennaNewsComponent } from './components/vienna-news/vienna-news.component';
 import { LocalNewsDetailComponent } from './components/local-news-detail/local-news-detail.component';
 import { WeatherComponent } from './components/weather/weather.component';
+import { MailmanLoaderComponent } from './components/mailman-loader/mailman-loader.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { WeatherComponent } from './components/weather/weather.component';
     TopStoriesComponent,
     ViennaNewsComponent,
     LocalNewsDetailComponent,
-    WeatherComponent
+    WeatherComponent,
+    MailmanLoaderComponent
   ],
   imports: [
     BrowserModule,
