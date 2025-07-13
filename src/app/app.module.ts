@@ -16,6 +16,10 @@ import { ViennaNewsComponent } from './components/vienna-news/vienna-news.compon
 import { LocalNewsDetailComponent } from './components/local-news-detail/local-news-detail.component';
 import { WeatherComponent } from './components/weather/weather.component';
 import { MailmanLoaderComponent } from './components/mailman-loader/mailman-loader.component';
+import { CookieConsentComponent } from './components/cookie-consent/cookie-consent.component';
+import { CookieSettingsComponent } from './components/cookie-settings/cookie-settings.component';
+import { CookiePolicyComponent } from './components/cookie-policy/cookie-policy.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,18 +32,24 @@ import { MailmanLoaderComponent } from './components/mailman-loader/mailman-load
     ViennaNewsComponent,
     LocalNewsDetailComponent,
     WeatherComponent,
-    MailmanLoaderComponent
+    MailmanLoaderComponent,
+    CookieConsentComponent,
+    CookieSettingsComponent,
+    CookiePolicyComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'local-news/vienna', pathMatch: 'full' },
       { path: 'news/:id', component: NewsDetailComponent },
       { path: 'local-news/vienna', component: ViennaNewsComponent },
-      { path: 'local-news/vienna/:id', component: LocalNewsDetailComponent }
+      { path: 'local-news/vienna/:id', component: LocalNewsDetailComponent },
+      { path: 'cookie-settings', component: CookieSettingsComponent },
+      { path: 'cookie-policy', component: CookiePolicyComponent }
     ])
   ],
   providers: [NewsService],
