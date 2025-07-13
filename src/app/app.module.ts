@@ -16,6 +16,7 @@ import { TopStoriesComponent } from './components/top-stories/top-stories.compon
 import { ViennaNewsComponent } from './components/vienna-news/vienna-news.component';
 import { LocalNewsDetailComponent } from './components/local-news-detail/local-news-detail.component';
 import { WeatherComponent } from './components/weather/weather.component';
+import { MailmanLoaderComponent } from './components/mailman-loader/mailman-loader.component';
 import { CookieBannerComponent } from './components/cookie-banner/cookie-banner.component';
 import { CookieSettingsComponent } from './components/cookie-settings/cookie-settings.component';
 import { CookiePolicyComponent } from './components/cookie-policy/cookie-policy.component';
@@ -31,6 +32,7 @@ import { CookiePolicyComponent } from './components/cookie-policy/cookie-policy.
     ViennaNewsComponent,
     LocalNewsDetailComponent,
     WeatherComponent,
+    MailmanLoaderComponent,
     CookieBannerComponent,
     CookieSettingsComponent,
     CookiePolicyComponent
