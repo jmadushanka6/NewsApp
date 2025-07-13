@@ -1,0 +1,19 @@
+<div class="cookie-settings">
+  <h2>Manage Cookie Preferences</h2>
+  <p>Update how we use cookies on this site.</p>
+  <form (ngSubmit)="save()">
+    <label>
+      <input type="checkbox" disabled checked />
+      <span>Essential cookies (always enabled)</span>
+    </label>
+    <label>
+      <input type="checkbox" [(ngModel)]="prefs.analytics" name="analytics" />
+      <span>Analytics cookies</span>
+    </label>
+    <label>
+      <input type="checkbox" [(ngModel)]="prefs.marketing" name="marketing" />
+      <span>Marketing cookies</span>
+    </label>
+    <button type="submit">Save preferences</button>
+  </form>
+</div>
