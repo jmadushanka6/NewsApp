@@ -1,0 +1,12 @@
+<h2>Cookie Preferences</h2>
+<form (ngSubmit)="save()">
+  <label>
+    <input type="checkbox" [(ngModel)]="analytics" name="analytics" /> Allow analytics cookies
+  </label>
+  <br />
+  <label>
+    <input type="checkbox" [(ngModel)]="marketing" name="marketing" /> Allow marketing cookies
+  </label>
+  <br />
+  <button type="submit">Save</button>
+</form>

@@ -1,0 +1,18 @@
+.banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fafafa;
+  border-top: 1px solid #ccc;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+}
+.banner button {
+  margin: 0 0.5rem;
+}
+.banner a {
+  display: inline-block;
+  margin-left: 1rem;
+}

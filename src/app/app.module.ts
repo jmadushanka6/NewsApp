@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
@@ -15,6 +16,9 @@ import { TopStoriesComponent } from './components/top-stories/top-stories.compon
 import { ViennaNewsComponent } from './components/vienna-news/vienna-news.component';
 import { LocalNewsDetailComponent } from './components/local-news-detail/local-news-detail.component';
 import { WeatherComponent } from './components/weather/weather.component';
+import { CookieBannerComponent } from './components/cookie-banner/cookie-banner.component';
+import { CookieSettingsComponent } from './components/cookie-settings/cookie-settings.component';
+import { CookiePolicyComponent } from './components/cookie-policy/cookie-policy.component';
 
 @NgModule({
   declarations: [
@@ -26,10 +30,14 @@ import { WeatherComponent } from './components/weather/weather.component';
     TopStoriesComponent,
     ViennaNewsComponent,
     LocalNewsDetailComponent,
-    WeatherComponent
+    WeatherComponent,
+    CookieBannerComponent,
+    CookieSettingsComponent,
+    CookiePolicyComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -37,7 +45,9 @@ import { WeatherComponent } from './components/weather/weather.component';
       { path: '', redirectTo: 'local-news/vienna', pathMatch: 'full' },
       { path: 'news/:id', component: NewsDetailComponent },
       { path: 'local-news/vienna', component: ViennaNewsComponent },
-      { path: 'local-news/vienna/:id', component: LocalNewsDetailComponent }
+      { path: 'local-news/vienna/:id', component: LocalNewsDetailComponent },
+      { path: 'cookie-settings', component: CookieSettingsComponent },
+      { path: 'cookie-policy', component: CookiePolicyComponent }
     ])
   ],
   providers: [NewsService],
