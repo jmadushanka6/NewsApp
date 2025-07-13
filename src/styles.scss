@@ -99,8 +99,12 @@ nav a:hover {
 }
 
 .news-detail img {
+  display: block;
+  width: 80vw;
+  height: 40vh;
   max-width: 100%;
-  height: auto;
+  object-fit: cover;
+  margin: 0 auto;
 }
 
 .accent {
