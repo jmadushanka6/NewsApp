@@ -1,3 +1,14 @@
 footer {
   text-align: center;
 }
+
+.footer-items {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.5rem;
+}
+
+.footer-items li {
+  display: inline-block;
+  margin: 0 0.5rem;
+}
