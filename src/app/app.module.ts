@@ -43,9 +43,9 @@ import { CookiePolicyComponent } from './components/cookie-policy/cookie-policy.
     AngularFirestoreModule,
     RouterModule.forRoot([
       { path: '',component: ViennaNewsComponent, pathMatch: 'full' },
-      { path: ':id', component: NewsDetailComponent },
       { path: 'cookie-settings', component: CookieSettingsComponent },
-      { path: 'cookie-policy', component: CookiePolicyComponent }
+      { path: 'cookie-policy', component: CookiePolicyComponent },
+      { path: ':id', component: NewsDetailComponent }
     ])
   ],
   providers: [NewsService],
