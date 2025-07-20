@@ -11,6 +11,9 @@ export interface News {
   title_long: string;
   desc_long: string;
   image: string;
+  tag?: string;
+  /** Optional list of tags describing the news item */
+  tags?: string[];
   bigImage?: string;
   created_at: any;
   views: number;

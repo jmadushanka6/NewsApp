@@ -2,9 +2,22 @@
   <app-mailman-loader *ngIf="loading || error" [error]="error"></app-mailman-loader>
   <h1 class="page-title">Vienna Local News</h1>
   <app-top-stories [stories]="topStories"></app-top-stories>
+  <div class="pagination-controls">
+    <label>
+      Items per page:
+      <select [(ngModel)]="itemsPerPage" (ngModelChange)="setItemsPerPage($event)">
+        <option *ngFor="let s of pageSizes" [value]="s">{{s}}</option>
+      </select>
+    </label>
+  </div>
   <div class="content-grid">
     <div class="news-feed">
-      <app-news-card *ngFor="let n of feed" [article]="n"></app-news-card>
+      <app-news-card *ngFor="let n of paginatedFeed" [article]="n"></app-news-card>
+      <div class="pager">
+        <button (click)="prevPage()" [disabled]="currentPage === 1">Prev</button>
+        <span>Page {{currentPage}} / {{totalPages}}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+      </div>
     </div>
     <aside class="sidebar">
       <div class="weather-widget">
