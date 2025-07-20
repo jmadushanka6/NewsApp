@@ -40,8 +40,8 @@ header {
   text-decoration: underline;
 }
 
-/* show separators after first five links */
-.main-nav a:nth-child(-n+5)::after {
+/* show separators after all but the last link */
+.main-nav a:not(:last-child)::after {
   content: '';
   position: absolute;
   right: -0.4rem;
