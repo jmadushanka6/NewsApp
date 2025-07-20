@@ -2,6 +2,7 @@
 <div class="local-news-detail" *ngIf="article$ | async as article">
   <h2>{{article.title_long}}</h2>
   <img [src]="article.image" alt="{{article.title_long}}">
+  <p class="tag" *ngIf="article.tag">{{article.tag}}</p>
   <p class="summary">{{article.desc_long}}</p>
   <p class="meta">Added: {{article.created_at | date:'yyyy-MM-dd hh:mm a'}} | Views: {{article.views}}</p>
 </div>

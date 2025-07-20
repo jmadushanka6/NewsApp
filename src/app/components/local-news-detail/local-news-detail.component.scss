@@ -1,14 +1,36 @@
 .local-news-detail {
   padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.local-news-detail h2 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  color: #d62828;
 }
 
 .local-news-detail img {
   display: block;
-  width: 80vw;
-  height: 40vh;
-  max-width: 100%;
+  width: 100%;
+  max-height: 400px;
   object-fit: cover;
-  margin: 0 auto 1rem;
+  margin: 0 auto 0.5rem;
+}
+
+.local-news-detail .tag {
+  display: inline-block;
+  background: #d62828;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  border-radius: 2px;
+  margin-bottom: 1rem;
+}
+
+.local-news-detail .summary {
+  line-height: 1.6;
+  margin-bottom: 1rem;
 }
 
 .meta {

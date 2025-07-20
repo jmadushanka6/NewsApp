@@ -1,4 +1,5 @@
 .news-card {
+  position: relative;
   background: #fff;
   border: 1px solid #dee2e6;
   overflow: hidden;
@@ -56,4 +57,15 @@
 .meta {
   font-size: 0.75rem;
   color: #6c757d;
+}
+
+.tag {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: #d62828;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  border-radius: 2px;
 }

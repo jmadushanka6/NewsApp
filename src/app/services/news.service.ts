@@ -12,6 +12,8 @@ export interface News {
   desc_long: string;
   image: string;
   bigImage?: string;
+  /** Optional tag or category for the article */
+  tag?: string;
   created_at: any;
   views: number;
 }
