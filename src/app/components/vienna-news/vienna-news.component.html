@@ -6,7 +6,17 @@
   <div class="content-grid">
       <app-mailman-loader *ngIf="loading || error" [error]="error"></app-mailman-loader>
     <div class="news-feed">
-      <app-news-card *ngFor="let n of feed" [article]="n"></app-news-card>
+      <app-news-card *ngFor="let n of pagedFeed" [article]="n"></app-news-card>
+      <div class="pagination-controls" *ngIf="feed.length">
+        <label>Items per page:
+          <select [ngModel]="itemsPerPage" (ngModelChange)="onPerPageChange($event)">
+            <option *ngFor="let opt of itemsPerPageOptions" [value]="opt">{{opt}}</option>
+          </select>
+        </label>
+        <button (click)="prevPage()" [disabled]="currentPage === 1">Prev</button>
+        <span>Page {{currentPage}} / {{totalPages}}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+      </div>
     </div>
     <aside class="sidebar">
       <div class="weather-widget">
