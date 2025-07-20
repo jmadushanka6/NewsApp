@@ -1,6 +1,7 @@
 <div class="top-stories">
   <div class="story" *ngFor="let s of stories" (click)="open(s)">
     <img [src]="s.image" alt="{{s.title_short}}" />
+    <span class="tag" *ngIf="s.tag">{{s.tag}}</span>
     <h2>{{s.title_short}}</h2>
     <small class="story-meta">Added: {{s.created_at | date:'yyyy-MM-dd hh:mm a'}} | Views: {{s.views}}</small>
   </div>

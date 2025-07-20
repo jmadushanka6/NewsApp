@@ -3,3 +3,26 @@
   font-size: 0.875rem;
   color: #6c757d;
 }
+
+.news-detail {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.news-detail img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+
+.tag {
+  display: inline-block;
+  background: #d62828;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
