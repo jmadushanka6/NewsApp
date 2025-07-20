@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CookieConsentService, CookiePreferences } from '../../services/cookie-consent.service';
+import { CookieConsentService } from '../../services/cookie-consent.service';
 
 @Component({
   selector: 'app-cookie-settings',
@@ -8,17 +8,19 @@ import { CookieConsentService, CookiePreferences } from '../../services/cookie-c
   styleUrls: ['./cookie-settings.component.scss']
 })
 export class CookieSettingsComponent {
-  prefs: CookiePreferences = { analytics: false, marketing: false };
+  analytics = true;
+  marketing = true;
 
   constructor(private consent: CookieConsentService, private router: Router) {
-    const saved = this.consent.getPreferences();
-    if (saved) {
-      this.prefs = { ...saved };
+    const prefs = consent.getPreferences();
+    if (prefs) {
+      this.analytics = prefs.analytics;
+      this.marketing = prefs.marketing;
     }
   }
 
   save(): void {
-    this.consent.savePreferences(this.prefs);
+    this.consent.savePreferences({ analytics: this.analytics, marketing: this.marketing });
     this.router.navigate(['/']);
   }
 }

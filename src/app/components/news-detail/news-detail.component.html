@@ -2,6 +2,8 @@
 <div class="news-detail" *ngIf="news$ | async as news">
   <h2>{{news.title_long}}</h2>
   <img [src]="news.bigImage || news.image" alt="{{news.title_long}}">
-  <p class="summary">{{news.desc_long}}</p>
+  <span class="tag" *ngIf="news.tag">{{news.tag}}</span>
   <p class="meta">Added: {{news.created_at | date:'yyyy-MM-dd hh:mm a'}} | Views: {{news.views}}</p>
+    <p></p>
+    <p class="summary">{{news.desc_long}}</p>
 </div>

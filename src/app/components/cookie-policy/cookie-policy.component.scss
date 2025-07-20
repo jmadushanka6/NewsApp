@@ -1,7 +1,16 @@
 .policy {
-  max-width: 800px;
+  max-width: 600px;
   margin: 2rem auto;
   background: var(--color-surface);
-  padding: 1rem;
+  border: 1px solid var(--text-muted);
   border-radius: 4px;
+  padding: 1.5rem;
+}
+
+.policy h2 {
+  margin-top: 0;
+}
+
+.policy ul {
+  padding-left: 1.2rem;
 }

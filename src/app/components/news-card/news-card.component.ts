@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocalNewsArticle } from '../../services/local-news.service';
+import { News } from '../../services/news.service';
 
 @Component({
   selector: 'app-news-card',
@@ -8,8 +8,8 @@ import { LocalNewsArticle } from '../../services/local-news.service';
   styleUrls: ['./news-card.component.scss']
 })
 export class NewsCardComponent {
-  @Input() article!: LocalNewsArticle;
-  @Input() baseRoute = '/local-news/vienna';
+  @Input() article!: News;
+  @Input() baseRoute = '';
 
   constructor(private router: Router) {}
 

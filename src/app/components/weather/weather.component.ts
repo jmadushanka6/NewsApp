@@ -55,7 +55,16 @@ export class WeatherComponent implements OnInit {
           .join(', ');
       }
       if (data.forecast && data.forecast.forecastday) {
-        this.forecast = data.forecast.forecastday;
+        this.forecast = data.forecast.forecastday.map((d: any) => {
+          const temps = d.hour?.map((h: any) => h.temp_c) || [];
+          const precip = d.hour?.reduce((s: number, h: any) => s + (h.precip_mm || 0), 0) || 0;
+          return {
+            ...d,
+            minTemp: temps.length ? Math.min(...temps) : undefined,
+            maxTemp: temps.length ? Math.max(...temps) : undefined,
+            precipTotal: precip
+          };
+        });
         localStorage.setItem(
           this.cacheKey,
           JSON.stringify({

@@ -1,104 +1,95 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
 
 export interface CookiePreferences {
+  essential: boolean;
   analytics: boolean;
   marketing: boolean;
+  timestamp: number;
 }
 
 @Injectable({ providedIn: 'root' })
 export class CookieConsentService {
-  private readonly regionKey = 'user_region';
-  private readonly prefsKey = 'cookie_preferences';
-  private readonly consentTimestampKey = 'cookie_consent_timestamp';
-  private readonly consentExpiryDays = 180; // ~6 months
-  private showBannerSubject = new BehaviorSubject<boolean>(false);
-  showBanner$ = this.showBannerSubject.asObservable();
+  private regionKey = 'userRegion';
+  private prefsKey = 'cookiePrefs';
+  region: string | null = null;
+  preferences: CookiePreferences | null = null;
 
-  private preferredRegion?: string;
-
-  constructor(private http: HttpClient) {
-    this.init();
+  constructor() {
+    this.load();
   }
 
-  /** Initialize by checking region and preferences */
-  private init(): void {
-    const prefs = this.getPreferences();
-    if (prefs && !this.isConsentExpired()) {
-      return; // preferences exist and not expired
+  private load(): void {
+    this.region = localStorage.getItem(this.regionKey);
+    const p = localStorage.getItem(this.prefsKey);
+    this.preferences = p ? (JSON.parse(p) as CookiePreferences) : null;
+    if (!this.region) {
+      this.region = this.detectRegion();
+      localStorage.setItem(this.regionKey, this.region);
     }
+    if (this.preferences && this.isExpired(this.preferences)) {
+      this.preferences = null;
+      localStorage.removeItem(this.prefsKey);
+    }
+  }
 
-    const region = localStorage.getItem(this.regionKey);
-    if (region) {
-      this.preferredRegion = region;
-      if (this.consentRequired(region)) {
-        this.showBannerSubject.next(true);
+  private isExpired(prefs: CookiePreferences): boolean {
+    const SIX_MONTHS = 1000 * 60 * 60 * 24 * 30 * 6;
+    return Date.now() - prefs.timestamp > SIX_MONTHS;
+  }
+
+  detectRegion(): string {
+    try {
+      const locale = navigator.language || '';
+      const region = new Intl.Locale(locale).region?.toUpperCase() || '';
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+      const eu = [
+        'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE'
+      ];
+      if (region === 'BR') {
+        return 'brazil';
       }
-    } else {
-      this.detectRegion().subscribe(r => {
-        this.preferredRegion = r;
-        if (this.consentRequired(r)) {
-          this.showBannerSubject.next(true);
+      if (region === 'GB' || region === 'UK') {
+        return 'uk';
+      }
+      if (region === 'US') {
+        if (tz.includes('Los_Angeles')) {
+          return 'california';
         }
-      });
+        return 'us';
+      }
+      if (eu.includes(region)) {
+        return 'eu';
+      }
+    } catch (e) {
+      // ignore
     }
+    return 'other';
   }
 
-  private detectRegion(): Observable<string> {
-    return this.http.get<any>('https://ipapi.co/json/').pipe(
-      tap(res => {
-        localStorage.setItem(this.regionKey, res.country_code || '');
-        if (res.region_code) {
-          localStorage.setItem('user_region_state', res.region_code);
-        }
-      }),
-      catchError(() => {
-        localStorage.setItem(this.regionKey, '');
-        return of('');
-      })
+  needsConsent(): boolean {
+    return (
+      this.region === 'eu' ||
+      this.region === 'uk' ||
+      this.region === 'brazil' ||
+      this.region === 'california'
     );
   }
 
-  private consentRequired(region: string): boolean {
-    const requiredRegions = ['EU', 'GB', 'BR', 'CA'];
-    if (region === 'US') {
-      // For US, only California (CA) has stricter requirements.
-      const state = localStorage.getItem('user_region_state');
-      return state === 'CA';
-    }
-    return requiredRegions.includes(region);
+  hasConsent(): boolean {
+    return this.preferences !== null;
   }
 
-  acceptAll(): void {
-    this.savePreferences({ analytics: true, marketing: true });
-  }
-
-  rejectAll(): void {
-    this.savePreferences({ analytics: false, marketing: false });
-  }
-
-  savePreferences(prefs: CookiePreferences): void {
-    localStorage.setItem(this.prefsKey, JSON.stringify(prefs));
-    localStorage.setItem(this.consentTimestampKey, Date.now().toString());
-    this.showBannerSubject.next(false);
+  savePreferences(prefs: { analytics: boolean; marketing: boolean }): void {
+    this.preferences = {
+      essential: true,
+      analytics: prefs.analytics,
+      marketing: prefs.marketing,
+      timestamp: Date.now(),
+    };
+    localStorage.setItem(this.prefsKey, JSON.stringify(this.preferences));
   }
 
   getPreferences(): CookiePreferences | null {
-    const str = localStorage.getItem(this.prefsKey);
-    if (!str) { return null; }
-    try {
-      return JSON.parse(str) as CookiePreferences;
-    } catch {
-      return null;
-    }
-  }
-
-  private isConsentExpired(): boolean {
-    const ts = localStorage.getItem(this.consentTimestampKey);
-    if (!ts) { return true; }
-    const diff = Date.now() - parseInt(ts, 10);
-    return diff > this.consentExpiryDays * 24 * 60 * 60 * 1000;
+    return this.preferences;
   }
 }
