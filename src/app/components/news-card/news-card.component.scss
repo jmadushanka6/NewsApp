@@ -47,6 +47,17 @@
   margin: 0;
 }
 
+@media (max-width: 768px) {
+  .title {
+    /* Clamp to two lines on small screens */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+}
+
 .summary {
   font-size: 0.875rem;
   line-height: 1.5;

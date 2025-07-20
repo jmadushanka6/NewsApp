@@ -32,6 +32,17 @@
   font-size: 1.5rem;
 }
 
+@media (max-width: 768px) {
+  .story h2 {
+    /* Limit title height and show ellipsis if text wraps */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+}
+
 .story:hover img {
   transform: scale(1.05);
 }
