@@ -1,0 +1,12 @@
+<div class="banner" *ngIf="consent.needsConsent() && !consent.hasConsent()">
+  <p>
+    We use cookies to give you the best experience. Choose which categories you
+    want to allow.
+  </p>
+  <div class="actions">
+    <button class="accept" (click)="acceptAll()">Accept All</button>
+    <button class="reject" (click)="rejectAll()">Reject All</button>
+    <button class="customize" (click)="customize()">Customize</button>
+  </div>
+  <a routerLink="/cookie-policy">Read our Cookie Policy</a>
+</div>

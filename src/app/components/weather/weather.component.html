@@ -5,9 +5,13 @@
       <div class="date">{{ d.date | date:'EEE, MMM d' }}</div>
       <img [src]="iconUrl(d.day.condition.icon)" alt="" />
       <div class="temp">
-        {{ d.day?.avgtemp_c !== undefined ? (d.day.avgtemp_c | number:'1.0-0') : '?' }}°C
+        {{ d.minTemp !== undefined ? (d.minTemp | number:'1.0-0') : '?' }}° /
+        {{ d.maxTemp !== undefined ? (d.maxTemp | number:'1.0-0') : '?' }}°C
       </div>
       <div class="desc">{{ d.day.condition.text }}</div>
+      <div class="precip" *ngIf="d.precipTotal">
+        Rain: {{ d.precipTotal | number:'1.0-1' }} mm
+      </div>
     </div>
   </div>
   <ng-template #loading>
