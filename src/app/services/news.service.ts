@@ -34,7 +34,7 @@ export class NewsService {
 
   getNews(): Observable<News[]> {
     return this.firestore
-      .collection<News>('news')
+      .collection<News>('news', ref => ref.orderBy('created_at', 'desc'))
       .valueChanges({ idField: 'id' })
       .pipe(map(list => list.map(n => this.normalizeArticle(n))));
   }
