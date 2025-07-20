@@ -39,6 +39,28 @@ export class NewsService {
       .pipe(map(list => list.map(n => this.normalizeArticle(n))));
   }
 
+  getTopNews(limit = 5): Observable<News[]> {
+    return this.firestore
+      .collection<News>('news', ref =>
+        ref.where('tag', '==', 'top').orderBy('created_at', 'desc').limit(limit)
+      )
+      .valueChanges({ idField: 'id' })
+      .pipe(map(list => list.map(n => this.normalizeArticle(n))));
+  }
+
+  getNewsPage(pageSize: number, startAfterDate: Date | null): Observable<News[]> {
+    return this.firestore
+      .collection<News>('news', ref => {
+        let query = ref.orderBy('created_at', 'desc').limit(pageSize);
+        if (startAfterDate) {
+          query = query.startAfter(startAfterDate);
+        }
+        return query;
+      })
+      .valueChanges({ idField: 'id' })
+      .pipe(map(list => list.map(n => this.normalizeArticle(n))));
+  }
+
   getNewsById(id: string): Observable<News> {
     return this.firestore
       .collection<News>('news')

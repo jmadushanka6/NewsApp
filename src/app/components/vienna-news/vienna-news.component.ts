@@ -16,20 +16,41 @@ export class ViennaNewsComponent implements OnInit {
   itemsPerPageOptions = [5, 10, 15, 30];
   itemsPerPage = this.itemsPerPageOptions[1];
   currentPage = 1;
+  pageCursors: (Date | null)[] = [null];
+  hasMore = false;
 
   constructor(private news: NewsService) {}
 
   ngOnInit(): void {
+    this.loadTopStories();
+    this.loadPage(1);
+  }
+
+  private loadTopStories() {
     this.news
-      .getNews()
+      .getTopNews()
       .pipe(first())
       .subscribe({
-        next: all => {
-          const topTag = 'top';
-          this.topStories = all.filter(a => a.tag?.toLowerCase() === topTag);
-          this.feed = all
-            .filter(a => a.tag?.toLowerCase() !== topTag)
-            .sort((a, b) => b.created_at.getTime() - a.created_at.getTime());
+        next: stories => (this.topStories = stories),
+        error: () => (this.error = true)
+      });
+  }
+
+  private loadPage(page: number) {
+    const cursor = this.pageCursors[page - 1] ?? null;
+    this.loading = true;
+    this.news
+      .getNewsPage(this.itemsPerPage, cursor)
+      .pipe(first())
+      .subscribe({
+        next: list => {
+          this.feed = list;
+          this.currentPage = page;
+          this.hasMore = list.length === this.itemsPerPage;
+          const last = list[list.length - 1];
+          if (last) {
+            this.pageCursors[page] = last.created_at;
+          }
           this.loading = false;
         },
         error: () => {
@@ -39,29 +60,26 @@ export class ViennaNewsComponent implements OnInit {
       });
   }
 
-  get pagedFeed(): News[] {
-    const start = (this.currentPage - 1) * this.itemsPerPage;
-    return this.feed.slice(start, start + this.itemsPerPage);
-  }
-
   get totalPages(): number {
-    return Math.ceil(this.feed.length / this.itemsPerPage) || 1;
+    return this.currentPage + (this.hasMore ? 1 : 0);
   }
 
   nextPage(): void {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
+    if (this.hasMore) {
+      this.loadPage(this.currentPage + 1);
     }
   }
 
   prevPage(): void {
     if (this.currentPage > 1) {
-      this.currentPage--;
+      this.loadPage(this.currentPage - 1);
     }
   }
 
   onPerPageChange(val: number) {
     this.itemsPerPage = val;
     this.currentPage = 1;
+    this.pageCursors = [null];
+    this.loadPage(1);
   }
 }
