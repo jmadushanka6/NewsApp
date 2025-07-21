@@ -4,7 +4,6 @@
   <app-top-stories [stories]="topStories"></app-top-stories>
     <h1 class="page-title">Daily News</h1>
   <div class="content-grid">
-      <app-mailman-loader *ngIf="loading || error" [error]="error"></app-mailman-loader>
     <div class="news-feed">
       <app-news-card *ngFor="let n of feed" [article]="n"></app-news-card>
       <div class="pagination-controls" *ngIf="feed.length">
