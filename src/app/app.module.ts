@@ -42,7 +42,8 @@ import { CookiePolicyComponent } from './components/cookie-policy/cookie-policy.
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     RouterModule.forRoot([
-      { path: '',component: ViennaNewsComponent, pathMatch: 'full' },
+      { path: '', component: ViennaNewsComponent, pathMatch: 'full' },
+      { path: 'category/:tag', component: ViennaNewsComponent },
       { path: 'cookie-settings', component: CookieSettingsComponent },
       { path: 'cookie-policy', component: CookiePolicyComponent },
       { path: ':id', component: NewsDetailComponent }

@@ -1,6 +1,6 @@
 <header [class.hidden]="isHidden">
   <div class="top-bar">
-    <div class="branding">
+    <a routerLink="/" class="branding" aria-label="Home">
       <span class="logo" aria-hidden="true">
         <svg viewBox="0 0 24 24" width="24" height="24">
           <circle cx="12" cy="12" r="10" fill="currentColor" />
@@ -8,7 +8,7 @@
         </svg>
       </span>
       <span class="site-title">News App</span>
-    </div>
+    </a>
 
     <button class="menu-toggle" aria-label="Toggle navigation" (click)="toggleMenu()">
       <span></span>
@@ -16,9 +16,9 @@
       <span></span>
     </button>
     <nav class="main-nav" [class.open]="isMenuOpen" (click)="closeMenu()">
-      <a href="#">Region</a>
-      <a href="#">Sport</a>
-      <a href="#">Business</a>
+      <a routerLink="/category/region">Region</a>
+      <a routerLink="/category/sport">Sport</a>
+      <a routerLink="/category/business">Business</a>
     </nav>
 
     <div class="social-icons">
