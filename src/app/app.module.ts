@@ -14,6 +14,7 @@ import { NewsService } from './services/news.service';
 import { NewsCardComponent } from './components/news-card/news-card.component';
 import { TopStoriesComponent } from './components/top-stories/top-stories.component';
 import { ViennaNewsComponent } from './components/vienna-news/vienna-news.component';
+import { TaggedNewsComponent } from './components/tagged-news/tagged-news.component';
 import { WeatherComponent } from './components/weather/weather.component';
 import { MailmanLoaderComponent } from './components/mailman-loader/mailman-loader.component';
 import { CookieBannerComponent } from './components/cookie-banner/cookie-banner.component';
@@ -29,6 +30,7 @@ import { CookiePolicyComponent } from './components/cookie-policy/cookie-policy.
     NewsCardComponent,
     TopStoriesComponent,
     ViennaNewsComponent,
+    TaggedNewsComponent,
     WeatherComponent,
     MailmanLoaderComponent,
     CookieBannerComponent,
@@ -43,8 +45,14 @@ import { CookiePolicyComponent } from './components/cookie-policy/cookie-policy.
     AngularFirestoreModule,
     RouterModule.forRoot([
       { path: '',component: ViennaNewsComponent, pathMatch: 'full' },
+      { path: 'region', component: TaggedNewsComponent, data: { tag: 'region' } },
+      { path: 'sport', component: TaggedNewsComponent, data: { tag: 'sport' } },
+      { path: 'business', component: TaggedNewsComponent, data: { tag: 'business' } },
       { path: 'cookie-settings', component: CookieSettingsComponent },
       { path: 'cookie-policy', component: CookiePolicyComponent },
+      { path: 'region/:id', component: NewsDetailComponent },
+      { path: 'sport/:id', component: NewsDetailComponent },
+      { path: 'business/:id', component: NewsDetailComponent },
       { path: ':id', component: NewsDetailComponent }
     ])
   ],

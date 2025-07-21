@@ -1,6 +1,6 @@
 <header [class.hidden]="isHidden">
   <div class="top-bar">
-    <div class="branding">
+    <div class="branding" routerLink="/">
       <span class="logo" aria-hidden="true">
         <svg viewBox="0 0 24 24" width="24" height="24">
           <circle cx="12" cy="12" r="10" fill="currentColor" />
@@ -16,15 +16,9 @@
       <span></span>
     </button>
     <nav class="main-nav" [class.open]="isMenuOpen" (click)="closeMenu()">
-      <a href="#">Home</a>
-      <a href="#">Region</a>
-      <a href="#">Sports</a>
-      <a href="#">Business</a>
-      <a href="#">Culture</a>
-      <a href="#">Lifestyle</a>
-      <a href="#">Tech</a>
-      <a href="#">Opinion</a>
-      <a routerLink="/local-news/vienna">Vienna</a>
+      <a routerLink="/region">Region</a>
+      <a routerLink="/sport">Sport</a>
+      <a routerLink="/business">Business</a>
     </nav>
 
     <div class="social-icons">
