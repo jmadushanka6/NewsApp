@@ -18,12 +18,40 @@ export class ViennaNewsComponent implements OnInit {
   currentPage = 1;
   pageCursors: (Date | null)[] = [null];
   hasMore = false;
+  totalNewsCount = 0;
+  totalPages = 1;
 
   constructor(private news: NewsService) {}
 
   ngOnInit(): void {
     this.loadTopStories();
+    this.loadTotalNewsCount();
     this.loadPage(1);
+  }
+
+  private loadTotalNewsCount() {
+    const cached = localStorage.getItem('newsCount');
+    if (cached) {
+      this.totalNewsCount = +cached;
+      this.updateTotalPages();
+    } else {
+      this.news
+        .getNewsCount()
+        .pipe(first())
+        .subscribe({
+          next: count => {
+            this.totalNewsCount = count;
+            localStorage.setItem('newsCount', count.toString());
+            this.updateTotalPages();
+          },
+          error: () => (this.error = true)
+        });
+    }
+  }
+
+  private updateTotalPages() {
+    this.totalPages = Math.max(1, Math.ceil(this.totalNewsCount / this.itemsPerPage));
+    this.hasMore = this.currentPage < this.totalPages;
   }
 
   private loadTopStories() {
@@ -46,7 +74,7 @@ export class ViennaNewsComponent implements OnInit {
         next: list => {
           this.feed = list;
           this.currentPage = page;
-          this.hasMore = list.length === this.itemsPerPage;
+          this.updateTotalPages();
           const last = list[list.length - 1];
           if (last) {
             this.pageCursors[page] = last.created_at;
@@ -60,9 +88,6 @@ export class ViennaNewsComponent implements OnInit {
       });
   }
 
-  get totalPages(): number {
-    return this.currentPage + (this.hasMore ? 1 : 0);
-  }
 
   nextPage(): void {
     if (this.hasMore) {
@@ -78,6 +103,7 @@ export class ViennaNewsComponent implements OnInit {
 
   onPerPageChange(val: number) {
     this.itemsPerPage = val;
+    this.updateTotalPages();
     this.currentPage = 1;
     this.pageCursors = [null];
     this.loadPage(1);
