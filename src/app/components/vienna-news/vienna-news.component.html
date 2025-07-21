@@ -1,7 +1,7 @@
 <div class="page">
   <app-mailman-loader *ngIf="loading || error" [error]="error"></app-mailman-loader>
-  <h1 class="page-title">Vienna Local News</h1>
-  <app-top-stories [stories]="topStories"></app-top-stories>
+  <h1 class="page-title">{{pageTitle}}</h1>
+  <app-top-stories *ngIf="!tag" [stories]="topStories"></app-top-stories>
   <div class="pagination-controls">
     <label>
       Items per page:

@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { News, NewsService } from '../../services/news.service';
-import { first } from 'rxjs';
+import { first, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-vienna-news',
   templateUrl: './vienna-news.component.html',
   styleUrls: ['./vienna-news.component.scss']
 })
-export class ViennaNewsComponent implements OnInit {
+export class ViennaNewsComponent implements OnInit, OnDestroy {
   topStories: News[] = [];
   feed: News[] = [];
   paginatedFeed: News[] = [];
@@ -17,18 +18,49 @@ export class ViennaNewsComponent implements OnInit {
   loading = true;
   error = false;
 
-  constructor(private news: NewsService) {}
+  tag: string | null = null;
+  pageTitle = 'Vienna Local News';
+  private sub?: Subscription;
+
+  constructor(private news: NewsService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.sub = this.route.paramMap.subscribe(params => {
+      this.tag = params.get('tag');
+      this.pageTitle = this.tag
+        ? `${this.tag.charAt(0).toUpperCase()}${this.tag.slice(1)} News`
+        : 'Vienna Local News';
+      this.loadArticles();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
+  }
+
+  private loadArticles(): void {
+    this.loading = true;
     this.news
       .getNews()
       .pipe(first())
       .subscribe({
         next: all => {
-          this.topStories = all.filter(a => a.tags?.includes('top'));
-          this.feed = all
-            .filter(a => !a.tags?.includes('top'))
-            .sort((a, b) => b.created_at.getTime() - a.created_at.getTime());
+          if (this.tag) {
+            this.topStories = [];
+            this.feed = all
+              .filter(a => a.tags?.includes(this.tag!))
+              .sort(
+                (a, b) => b.created_at.getTime() - a.created_at.getTime()
+              );
+          } else {
+            this.topStories = all.filter(a => a.tags?.includes('top'));
+            this.feed = all
+              .filter(a => !a.tags?.includes('top'))
+              .sort(
+                (a, b) => b.created_at.getTime() - a.created_at.getTime()
+              );
+          }
+          this.currentPage = 1;
           this.updatePagination();
           this.loading = false;
         },
