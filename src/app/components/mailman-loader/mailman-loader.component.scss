@@ -9,12 +9,23 @@
 .mailman {
   width: 100%;
   height: 100%;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path d='M28 50h-4v-14h4zM40 50h-4V36h4z' fill='%23447ab4'/><rect x='26' y='22' width='12' height='16' rx='2' fill='%235975a1'/><path d='M24 28h-6v8h6z' fill='%238d6e63'/><circle cx='32' cy='14' r='6' fill='%23a67c52'/><rect x='28' y='8' width='8' height='3' fill='%23447ab4'/></svg>");
-  background-size: contain;
-  background-repeat: no-repeat;
   position: absolute;
   bottom: 0;
   animation: walk 6s linear infinite;
+}
+
+.left-leg,
+.right-leg {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+}
+
+.left-leg {
+  animation: left-swing 0.8s ease-in-out infinite;
+}
+
+.right-leg {
+  animation: right-swing 0.8s ease-in-out infinite;
 }
 
 .letter {
@@ -51,4 +62,14 @@
 @keyframes drop {
   0% { transform: translate(0, 0); opacity: 1; }
   100% { transform: translate(-10vmin, 10vmin); opacity: 0; }
+}
+
+@keyframes left-swing {
+  0%, 100% { transform: rotate(10deg); }
+  50% { transform: rotate(-10deg); }
+}
+
+@keyframes right-swing {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(10deg); }
 }
