@@ -68,4 +68,11 @@ export class NewsService {
       .valueChanges({ idField: 'id' })
       .pipe(map(n => (n ? this.normalizeArticle(n) : (n as any))));
   }
+
+  getNewsCount(): Observable<number> {
+    return this.firestore
+      .collection<News>('news')
+      .get()
+      .pipe(map(snapshot => snapshot.size));
+  }
 }
