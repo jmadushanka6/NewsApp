@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of  } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 export interface News {
   id: string;
@@ -39,15 +39,23 @@ export class NewsService {
       .pipe(map(list => list.map(n => this.normalizeArticle(n))));
   }
 
-  getTopNews(limit = 5): Observable<News[]> {
+  getTopNews(limit: number = 5): Observable<News[]> {
     return this.firestore
-      .collection<News>('news', ref =>
-        ref.where('tag', '==', 'top').orderBy('created_at', 'desc').limit(limit)
-      )
-      .valueChanges({ idField: 'id' })
-      .pipe(map(list => list.map(n => this.normalizeArticle(n))));
+        .collection<News>('news', ref =>
+            ref
+                .where('top', '==', true)
+                .orderBy('created_at', 'desc')
+                .limit(limit)
+        )
+        .valueChanges({ idField: 'id' })
+        .pipe(
+            map(newsList => newsList.map(news => this.normalizeArticle(news))),
+            catchError(error => {
+              console.error('Error fetching top news:', error);
+              return of([] as News[]); // return empty array on error
+            })
+        );
   }
-
   getNewsPage(pageSize: number, startAfterDate: Date | null): Observable<News[]> {
     return this.firestore
       .collection<News>('news', ref => {
@@ -66,6 +74,7 @@ export class NewsService {
     pageSize: number,
     startAfterDate: Date | null
   ): Observable<News[]> {
+    console.log(tag)
     return this.firestore
       .collection<News>('news', ref => {
         let query = ref
@@ -78,7 +87,11 @@ export class NewsService {
         return query;
       })
       .valueChanges({ idField: 'id' })
-      .pipe(map(list => list.map(n => this.normalizeArticle(n))));
+      .pipe(map(list => list.map(n => this.normalizeArticle(n))),
+          catchError(error => {
+            console.error('Error fetching top news:', error);
+            return of([] as News[]); // return empty array on error
+          }));
   }
 
   getNewsById(id: string): Observable<News> {
