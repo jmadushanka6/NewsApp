@@ -46,6 +46,23 @@
   margin: 1rem 0;
 }
 
+.per-page {
+  margin: 0.5rem 0 1rem;
+  text-align: center;
+
+  label {
+    margin-right: 0.25rem;
+  }
+
+  select {
+    padding: 0.25rem 0.5rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 4px;
+    background: var(--color-surface);
+    color: var(--text-primary);
+  }
+}
+
 @media (max-width: 768px) {
   .content-grid {
     grid-template-columns: 1fr;
