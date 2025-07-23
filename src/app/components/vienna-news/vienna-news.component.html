@@ -6,16 +6,16 @@
   <div class="content-grid">
     <div class="news-feed">
       <app-news-card *ngFor="let n of feed" [article]="n"></app-news-card>
-      <div class="pagination-controls" *ngIf="feed.length">
-        <button (click)="prevPage()" [disabled]="currentPage === 1">Prev</button>
-        <span>Page {{currentPage}} / {{totalPages}}</span>
-        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
-      </div>
       <div class="per-page" *ngIf="feed.length">
         <label for="perPageSelect">Items per page:</label>
         <select id="perPageSelect" [ngModel]="itemsPerPage" (ngModelChange)="onPerPageChange($event)">
           <option *ngFor="let opt of itemsPerPageOptions" [value]="opt">{{opt}}</option>
         </select>
+      </div>
+      <div class="pagination-controls" *ngIf="feed.length">
+        <button (click)="prevPage()" [disabled]="currentPage === 1">Prev</button>
+        <span>Page {{currentPage}} / {{totalPages}}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
       </div>
     </div>
     <aside class="sidebar">
