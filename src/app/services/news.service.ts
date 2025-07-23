@@ -74,7 +74,6 @@ export class NewsService {
     pageSize: number,
     startAfterDate: Date | null
   ): Observable<News[]> {
-    console.log(tag)
     return this.firestore
       .collection<News>('news', ref => {
         let query = ref
