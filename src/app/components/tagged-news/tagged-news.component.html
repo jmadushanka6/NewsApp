@@ -5,14 +5,15 @@
     <div class="news-feed">
       <app-news-card *ngFor="let n of feed" [article]="n" [baseRoute]="'/' + tag"></app-news-card>
       <div class="pagination-controls" *ngIf="feed.length">
-        <label>Items per page:
-          <select [ngModel]="itemsPerPage" (ngModelChange)="onPerPageChange($event)">
-            <option *ngFor="let opt of itemsPerPageOptions" [value]="opt">{{opt}}</option>
-          </select>
-        </label>
         <button (click)="prevPage()" [disabled]="currentPage === 1">Prev</button>
         <span>Page {{currentPage}} / {{totalPages}}</span>
         <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+      </div>
+      <div class="per-page" *ngIf="feed.length">
+        <label for="perPageSelectTag">Items per page:</label>
+        <select id="perPageSelectTag" [ngModel]="itemsPerPage" (ngModelChange)="onPerPageChange($event)">
+          <option *ngFor="let opt of itemsPerPageOptions" [value]="opt">{{opt}}</option>
+        </select>
       </div>
     </div>
     <aside class="sidebar">

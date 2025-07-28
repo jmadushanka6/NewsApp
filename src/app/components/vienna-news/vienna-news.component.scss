@@ -44,10 +44,12 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+  grid-column: 1 / -1;
   margin: 1rem 0 0;
 }
 
 .per-page {
+  grid-column: 1 / -1;
   margin: 0.5rem 0 1rem;
   text-align: center;
 
