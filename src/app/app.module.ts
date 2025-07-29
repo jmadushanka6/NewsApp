@@ -17,6 +17,7 @@ import { ViennaNewsComponent } from './components/vienna-news/vienna-news.compon
 import { TaggedNewsComponent } from './components/tagged-news/tagged-news.component';
 import { WeatherComponent } from './components/weather/weather.component';
 import { MailmanLoaderComponent } from './components/mailman-loader/mailman-loader.component';
+import { SkeletonScreenComponent } from './components/skeleton-screen/skeleton-screen.component';
 import { CookieBannerComponent } from './components/cookie-banner/cookie-banner.component';
 import { CookieSettingsComponent } from './components/cookie-settings/cookie-settings.component';
 import { CookiePolicyComponent } from './components/cookie-policy/cookie-policy.component';
@@ -33,6 +34,7 @@ import { CookiePolicyComponent } from './components/cookie-policy/cookie-policy.
     TaggedNewsComponent,
     WeatherComponent,
     MailmanLoaderComponent,
+    SkeletonScreenComponent,
     CookieBannerComponent,
     CookieSettingsComponent,
     CookiePolicyComponent

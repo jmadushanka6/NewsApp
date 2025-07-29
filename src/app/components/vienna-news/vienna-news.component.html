@@ -1,9 +1,9 @@
 <div class="page">
   <h1 class="page-title">Top News</h1>
-    <app-mailman-loader *ngIf="loading || error" [error]="error"></app-mailman-loader>
-  <app-top-stories [stories]="topStories"></app-top-stories>
+    <app-skeleton-screen *ngIf="loading"></app-skeleton-screen>
+  <app-top-stories [stories]="topStories" *ngIf="!loading"></app-top-stories>
     <h1 class="page-title">Daily News</h1>
-  <div class="content-grid">
+  <div class="content-grid" *ngIf="!loading">
     <div class="news-feed">
       <app-news-card *ngFor="let n of feed" [article]="n"></app-news-card>
       <div class="pagination-controls" *ngIf="feed.length">
