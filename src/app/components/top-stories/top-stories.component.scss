@@ -1,7 +1,9 @@
 .top-stories {
   display: flex;
   gap: 1rem;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 .story {
@@ -9,6 +11,7 @@
   flex: 1;
   cursor: pointer;
   overflow: hidden;
+  scroll-snap-align: start;
 }
 
 .story img {
@@ -62,4 +65,19 @@
   font-size: 0.75rem;
   border-radius: 4px;
   text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .top-stories {
+    scroll-snap-type: x mandatory;
+  }
+
+  .story {
+    flex: 0 0 auto;
+    min-width: 80vw;
+  }
+
+  .story:active img {
+    transform: scale(0.95);
+  }
 }
