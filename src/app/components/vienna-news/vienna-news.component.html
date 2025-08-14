@@ -1,27 +1,48 @@
-<div class="page">
-  <h1 class="page-title">Top News</h1>
-    <app-skeleton-screen *ngIf="loading"></app-skeleton-screen>
-  <app-top-stories [stories]="topStories" *ngIf="!loading"></app-top-stories>
-    <h1 class="page-title">Daily News</h1>
-  <div class="content-grid" *ngIf="!loading">
-    <div class="news-feed">
-      <app-news-card *ngFor="let n of feed" [article]="n"></app-news-card>
-      <div class="pagination-controls" *ngIf="feed.length">
-        <button (click)="prevPage()" [disabled]="currentPage === 1">Prev</button>
-        <span>Page {{currentPage}} / {{totalPages}}</span>
-        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
-      </div>
-      <div class="per-page" *ngIf="feed.length">
-        <label for="perPageSelect">Items per page:</label>
-        <select id="perPageSelect" [ngModel]="itemsPerPage" (ngModelChange)="onPerPageChange($event)">
-          <option *ngFor="let opt of itemsPerPageOptions" [value]="opt">{{opt}}</option>
-        </select>
+<ng-container *ngIf="isMobile; else desktop">
+  <app-skeleton-screen *ngIf="loading"></app-skeleton-screen>
+  <div class="mobile-page" *ngIf="!loading">
+    <h1 class="section-title">Top News</h1>
+    <div class="horizontal-scroll">
+      <app-news-card *ngFor="let n of topStories" [article]="n"></app-news-card>
+    </div>
+    <div class="weather-widget">
+      <app-weather></app-weather>
+    </div>
+    <div class="category-section" *ngFor="let sec of tagSections">
+      <h2 class="section-title" (click)="openCategory(sec.route)">{{sec.label}}</h2>
+      <div class="horizontal-scroll">
+        <app-news-card *ngFor="let n of taggedFeeds[sec.route]" [article]="n" [baseRoute]="'/' + sec.route"></app-news-card>
       </div>
     </div>
-    <aside class="sidebar">
-      <div class="weather-widget">
-          <app-weather></app-weather>
-      </div>
-    </aside>
   </div>
-</div>
+</ng-container>
+
+<ng-template #desktop>
+  <div class="page">
+    <h1 class="page-title">Top News</h1>
+    <app-skeleton-screen *ngIf="loading"></app-skeleton-screen>
+    <app-top-stories [stories]="topStories" *ngIf="!loading"></app-top-stories>
+    <h1 class="page-title">Daily News</h1>
+    <div class="content-grid" *ngIf="!loading">
+      <div class="news-feed">
+        <app-news-card *ngFor="let n of feed" [article]="n"></app-news-card>
+        <div class="pagination-controls" *ngIf="feed.length">
+          <button (click)="prevPage()" [disabled]="currentPage === 1">Prev</button>
+          <span>Page {{currentPage}} / {{totalPages}}</span>
+          <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+        </div>
+        <div class="per-page" *ngIf="feed.length">
+          <label for="perPageSelect">Items per page:</label>
+          <select id="perPageSelect" [ngModel]="itemsPerPage" (ngModelChange)="onPerPageChange($event)">
+            <option *ngFor="let opt of itemsPerPageOptions" [value]="opt">{{opt}}</option>
+          </select>
+        </div>
+      </div>
+      <aside class="sidebar">
+        <div class="weather-widget">
+          <app-weather></app-weather>
+        </div>
+      </aside>
+    </div>
+  </div>
+</ng-template>

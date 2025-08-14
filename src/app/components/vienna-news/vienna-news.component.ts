@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { News, NewsService } from '../../services/news.service';
 import { first } from 'rxjs';
 
@@ -13,20 +14,34 @@ export class ViennaNewsComponent implements OnInit {
   loading = true;
   error = false;
 
+  isMobile = window.innerWidth <= 768;
+  taggedFeeds: { [key: string]: News[] } = {};
+  tagSections = [
+    { label: 'Local', route: 'region' },
+    { label: 'Sport', route: 'sport' },
+    { label: 'Business', route: 'business' }
+  ];
+
   itemsPerPageOptions = [5, 10, 15, 30];
   itemsPerPage = this.itemsPerPageOptions[1];
   currentPage = 1;
   pageCursors: (Date | null)[] = [null];
-  hasMore = false;
   totalNewsCount = 0;
   totalPages = 1;
 
-  constructor(private news: NewsService) {}
+  constructor(private news: NewsService, private router: Router) {}
 
   ngOnInit(): void {
-    this.loadTopStories();
-    this.loadTotalNewsCount();
-    this.loadPage(1);
+    if (this.isMobile) {
+      const limit = this.calculateMobileLimit();
+      this.loadTopStories(limit);
+      this.loadTaggedSections(limit);
+    } else {
+      this.itemsPerPage = this.calculateDesktopItemsPerPage();
+      this.loadTopStories();
+      this.loadTotalNewsCount();
+      this.loadPage(1);
+    }
   }
 
   private loadTotalNewsCount() {
@@ -51,17 +66,59 @@ export class ViennaNewsComponent implements OnInit {
 
   private updateTotalPages() {
     this.totalPages = Math.max(1, Math.ceil(this.totalNewsCount / this.itemsPerPage));
-    this.hasMore = this.currentPage < this.totalPages;
   }
 
-  private loadTopStories() {
+  private loadTopStories(limit: number = 5) {
     this.news
-      .getTopNews()
+      .getTopNews(limit)
       .pipe(first())
       .subscribe({
-        next: stories => (this.topStories = stories),
-        error: () => (this.error = true)
+        next: stories => {
+          this.topStories = stories;
+          if (this.isMobile) {
+            this.loading = false;
+          }
+        },
+        error: () => {
+          this.error = true;
+          this.loading = false;
+        }
       });
+  }
+
+  private loadTaggedSections(limit: number) {
+    this.tagSections.forEach(sec => {
+      this.news
+        .getNewsPageByTag(sec.route, limit, null)
+        .pipe(first())
+        .subscribe({
+          next: list => (this.taggedFeeds[sec.route] = list),
+          error: () => (this.error = true)
+        });
+    });
+  }
+
+  private calculateMobileLimit(): number {
+    const width = window.innerWidth;
+    if (width < 480) {
+      return 3;
+    }
+    if (width < 768) {
+      return 5;
+    }
+    return 7;
+  }
+
+  private calculateDesktopItemsPerPage(): number {
+    const width = window.innerWidth;
+    if (width < 992) {
+      return 10;
+    }
+    return 15;
+  }
+
+  openCategory(route: string) {
+    this.router.navigate([route]);
   }
 
   private loadPage(page: number) {
@@ -90,7 +147,7 @@ export class ViennaNewsComponent implements OnInit {
 
 
   nextPage(): void {
-    if (this.hasMore) {
+    if (this.currentPage < this.totalPages) {
       this.loadPage(this.currentPage + 1);
     }
   }
