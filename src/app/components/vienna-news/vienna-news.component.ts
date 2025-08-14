@@ -26,7 +26,6 @@ export class ViennaNewsComponent implements OnInit {
   itemsPerPage = this.itemsPerPageOptions[1];
   currentPage = 1;
   pageCursors: (Date | null)[] = [null];
-  hasMore = false;
   totalNewsCount = 0;
   totalPages = 1;
 
@@ -67,7 +66,6 @@ export class ViennaNewsComponent implements OnInit {
 
   private updateTotalPages() {
     this.totalPages = Math.max(1, Math.ceil(this.totalNewsCount / this.itemsPerPage));
-    this.hasMore = this.currentPage < this.totalPages;
   }
 
   private loadTopStories(limit: number = 5) {
@@ -149,7 +147,7 @@ export class ViennaNewsComponent implements OnInit {
 
 
   nextPage(): void {
-    if (this.hasMore) {
+    if (this.currentPage < this.totalPages) {
       this.loadPage(this.currentPage + 1);
     }
   }

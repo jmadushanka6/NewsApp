@@ -95,6 +95,13 @@
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   padding-bottom: 1rem;
+  scroll-snap-type: x mandatory;
+
+  app-news-card {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    min-width: 80vw;
+  }
 }
 
 .category-section {
