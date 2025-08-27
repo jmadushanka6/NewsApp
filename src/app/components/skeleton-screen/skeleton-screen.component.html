@@ -1,10 +1,14 @@
 <div class="skeleton-page">
-  <div class="skeleton-top">
-    <div class="skeleton-story" *ngFor="let _ of [0,1,2]; trackBy: trackByIndex"></div>
+  <div class="skeleton-top" *ngIf="showTop">
+    <div
+      class="skeleton-story"
+      *ngFor="let _ of topPlaceholders; trackBy: trackByIndex"
+    ></div>
   </div>
-  <div class="skeleton-feed">
-    <div class="skeleton-row" *ngFor="let r of [].constructor(rows); let i = index; trackBy: trackByIndex">
-      <div class="skeleton-card" *ngFor="let _ of [0,1,2]; trackBy: trackByIndex"></div>
-    </div>
+  <div class="skeleton-feed" #feed>
+    <div
+      class="skeleton-card"
+      *ngFor="let _ of placeholders; trackBy: trackByIndex"
+    ></div>
   </div>
 </div>

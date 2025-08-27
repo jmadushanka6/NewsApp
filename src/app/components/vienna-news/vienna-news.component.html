@@ -1,6 +1,6 @@
 <div class="page">
   <h1 class="page-title">Top News</h1>
-    <app-skeleton-screen *ngIf="loading"></app-skeleton-screen>
+    <app-skeleton-screen *ngIf="loading" [showTop]="true"></app-skeleton-screen>
   <app-top-stories [stories]="topStories" *ngIf="!loading"></app-top-stories>
     <h1 class="page-title">Daily News</h1>
   <div class="content-grid" *ngIf="!loading">
