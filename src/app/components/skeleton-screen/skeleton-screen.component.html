@@ -1,14 +1,16 @@
 <div class="skeleton-page">
   <div class="skeleton-top" *ngIf="showTop">
-    <div
-      class="skeleton-story"
-      *ngFor="let _ of topPlaceholders; trackBy: trackByIndex"
-    ></div>
+    <div class="skeleton-story"></div>
   </div>
-  <div class="skeleton-feed" #feed>
-    <div
-      class="skeleton-card"
-      *ngFor="let _ of placeholders; trackBy: trackByIndex"
-    ></div>
+  <div class="skeleton-content-grid">
+    <div class="skeleton-feed" #feed>
+      <div
+        class="skeleton-card"
+        *ngFor="let _ of placeholders; trackBy: trackByIndex"
+      ></div>
+    </div>
+    <aside class="skeleton-sidebar">
+      <div class="skeleton-weather"></div>
+    </aside>
   </div>
 </div>

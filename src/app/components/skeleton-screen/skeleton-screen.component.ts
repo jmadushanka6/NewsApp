@@ -28,8 +28,6 @@ export class SkeletonScreenComponent
   private cols = 0;
   /** Array used to drive ngFor for card placeholders */
   placeholders: number[] = [];
-  /** Placeholder array for top stories */
-  topPlaceholders = Array(3);
 
   ngOnInit(): void {
     this.calculateRows();
