@@ -102,10 +102,10 @@ export class NewsService {
   }
 
   incrementNewsViews(id: string): Promise<void> {
-    return this.firestore
-      .collection('news')
-      .doc(id)
-      .update({ views: firebase.firestore.FieldValue.increment(1) });
+    const newsRef = this.firestore.doc(`news/${id}`);
+    return newsRef.update({
+      views: firebase.firestore.FieldValue.increment(1)
+    });
   }
 
   getNewsCount(): Observable<number> {
