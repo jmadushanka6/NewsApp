@@ -1,5 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 
+type ThemeMode = 'light' | 'dark';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -11,7 +13,12 @@ export class HeaderComponent {
   showSearch = false;
   searchTerm = '';
   suggestions: string[] = [];
+  isDarkTheme = false;
   private lastScrollY = 0;
+
+  constructor() {
+    this.initializeTheme();
+  }
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
@@ -32,6 +39,25 @@ export class HeaderComponent {
   onSearch(value: string): void {
     this.searchTerm = value;
     this.updateSuggestions();
+  }
+
+  toggleTheme(): void {
+    this.isDarkTheme = !this.isDarkTheme;
+    this.applyTheme(this.isDarkTheme ? 'dark' : 'light');
+  }
+
+  private initializeTheme(): void {
+    const storedTheme = localStorage.getItem('theme') as ThemeMode | null;
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = storedTheme ?? (prefersDark ? 'dark' : 'light');
+
+    this.isDarkTheme = theme === 'dark';
+    this.applyTheme(theme);
+  }
+
+  private applyTheme(theme: ThemeMode): void {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
   }
 
   private updateSuggestions(): void {

@@ -77,6 +77,21 @@ header {
 }
 
 
+
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--color-surface);
+  color: var(--color-surface);
+  border-radius: 999px;
+  padding: 0.3rem 0.55rem;
+  cursor: pointer;
+  margin-left: 0.75rem;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
 .search-btn {
   background: transparent;
   border: none;
