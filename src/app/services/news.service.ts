@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
-import { Observable, of  } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 export interface News {
@@ -99,6 +99,13 @@ export class NewsService {
       .doc(id)
       .valueChanges({ idField: 'id' })
       .pipe(map(n => (n ? this.normalizeArticle(n) : (n as any))));
+  }
+
+  incrementNewsViews(id: string): Promise<void> {
+    const newsRef = this.firestore.doc(`news/${id}`);
+    return newsRef.update({
+      views: firebase.firestore.FieldValue.increment(1)
+    });
   }
 
   getNewsCount(): Observable<number> {
