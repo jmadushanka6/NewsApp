@@ -44,6 +44,10 @@
       </a>
     </div>
 
+    <button class="theme-toggle" type="button" [attr.aria-label]="isDarkTheme ? 'Switch to light theme' : 'Switch to dark theme'" (click)="toggleTheme()">
+      <span aria-hidden="true">{{ isDarkTheme ? '☀️' : '🌙' }}</span>
+    </button>
+
     <div class="search-container">
       <button class="search-btn" aria-label="Search" (click)="toggleSearch()">
         <svg viewBox="0 0 24 24" width="20" height="20">
