@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
@@ -102,9 +103,14 @@ export class NewsService {
   }
 
   incrementNewsViews(id: string): Promise<void> {
-    const newsRef = this.firestore.doc(`news/${id}`);
-    return newsRef.update({
-      views: firebase.firestore.FieldValue.increment(1)
+    const newsRef = this.firestore.firestore.doc(`news/${id}`);
+
+    return this.firestore.firestore.runTransaction(async transaction => {
+      const snapshot = await transaction.get(newsRef);
+      const currentViews = snapshot.get('views');
+      const nextViews = typeof currentViews === 'number' ? currentViews + 1 : 1;
+
+      transaction.update(newsRef, { views: nextViews });
     });
   }
 
