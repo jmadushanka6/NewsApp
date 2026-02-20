@@ -103,9 +103,14 @@ export class NewsService {
   }
 
   incrementNewsViews(id: string): Promise<void> {
-    const newsRef = this.firestore.doc(`news/${id}`);
-    return newsRef.update({
-      views: firebase.firestore.FieldValue.increment(1)
+    const newsRef = this.firestore.firestore.doc(`news/${id}`);
+
+    return this.firestore.firestore.runTransaction(async transaction => {
+      const snapshot = await transaction.get(newsRef);
+      const currentViews = snapshot.get('views');
+      const nextViews = typeof currentViews === 'number' ? currentViews + 1 : 1;
+
+      transaction.update(newsRef, { views: nextViews });
     });
   }
 
